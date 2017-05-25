@@ -66,6 +66,27 @@ public class BD_Menu extends BD_Conecta{
 			return -1;
 		}
 	}
+	public double devuelve_precio(int cod_plato,int cantidad){
+		String cadenaSQL="SELECT precio FROM menu WHERE cod_plato='"+cod_plato+"'";
+		double precio=0;
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			if ( reg.next()){
+				precio=cantidad*reg.getDouble("precio");
+				
+			}
+			s.close();
+			this.cerrar();
+			return precio;			
+		}
+		catch ( SQLException e){
+			this.cerrar();
+			return -1;
+		}
+		
+	}
 //Método para cambiar precio de  un plato.
 	public int cambiar_precio(int cod_menu, double nuevoprecio){
 		String cadenaSQL="UPDATE menu SET precio = '" +nuevoprecio + "' WHERE cod_plato = '" +cod_menu+"' ";
