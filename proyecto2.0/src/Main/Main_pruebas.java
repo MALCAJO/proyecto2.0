@@ -19,7 +19,7 @@ public class Main_pruebas {
 		String direc,nombre,apellido, regist;
 		String direccion;
 		int i=0;
-
+//Forzando commmit
 		BD_Menu bdmenu=new BD_Menu("base_propiedades.xml");
 		BD_Restaurante bdrest=new BD_Restaurante("base_propiedades.xml");		
 		BD_Usuario bdusu=new BD_Usuario("base_propiedades.xml");
@@ -273,7 +273,8 @@ public class Main_pruebas {
 												if(filas==0)												
 													System.out.println("No se ha borrado los menus del restaurante");
 													
-												if(filas>1){
+												if(filas>=1){
+													
 													filas=bdrest.borrar_Restaurante(codres);
 													switch(filas){
 														case 0:
