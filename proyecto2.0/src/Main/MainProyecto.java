@@ -2,9 +2,11 @@ package Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.Vector;
 
 import BaseDatos.BD_Menu;
+import BaseDatos.BD_Pedido;
 import BaseDatos.BD_Restaurante;
 import BaseDatos.BD_Usuario;
 import modelos.*;
@@ -24,11 +26,13 @@ public class MainProyecto {
 		int codpos=0;
 		String direc, regist;
 		String direccion, nombre, apellido;
-		int i=0,filas,telefono=0, codigo = 0,salida=0;
+		int i=0,filas,telefono=0, codigo = 0,salida=0, cod_plato = 0, qPlatos=0;
+		double precio = 0;
 
 		BD_Menu bdmenu=new BD_Menu("base_propiedades.xml");
 		BD_Restaurante bdrest=new BD_Restaurante("base_propiedades.xml");		
 		BD_Usuario bdusu=new BD_Usuario("base_propiedades.xml");		
+		BD_Pedido bdped=new BD_Pedido("base_propiedades.xml");
 
 		do {
 			try {
@@ -89,12 +93,49 @@ public class MainProyecto {
 								codigo = Integer.parseInt(br.readLine());
 								Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
 								System.out.println(menus);
+								if(menus.size()==0){
+									System.out.println("todavia no se han dado de alta menus");
+								}
+								try{
 								do{
-									System.out.println("salida 4");
-									
+									System.out.println("1. agregar plato del menu");
+									System.out.println("2. quitar plato del menu");
+									System.out.println("3. confirmar pedido");
+									System.out.println("4. salida");
+									salida = Integer.parseInt(br.readLine());
 								}while(salida==4);
+								}catch(NumberFormatException e){
+									System.out.println(e.getMessage());
+								}
 								
-
+								switch(salida){
+								
+								case 1:
+									
+									LocalDate fechaActual = LocalDate.now();
+									System.out.println("que plato quieres? dime el codigo del plato");
+									cod_plato = Integer.parseInt(br.readLine());
+									System.out.println("cuantos platos quieres?");
+									qPlatos = Integer.parseInt(br.readLine());
+									precio = 
+									Vector <Linea_pedido> lPedido = new Vector<Linea_pedido>(cod_plato,qPlatos,fechaActual,precio);
+									
+									break;
+									
+								case 2:
+									
+									
+									break;
+								case 3:
+									
+									
+									break;
+								case 4:
+									
+									
+									break;
+								}
+								
 							}else{
 
 								if(direc.equals("NO")){
@@ -122,7 +163,9 @@ public class MainProyecto {
 										}
 										Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
 										System.out.println(menus);
-
+										
+										
+										
 									}}}}
 
 					break;
@@ -148,7 +191,10 @@ public class MainProyecto {
 							System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
 						System.out.print("dime el restaurante que quieres");
 						codres = Integer.parseInt(br.readLine());
-
+						
+						
+						
+						
 					}
 					break;
 				}
