@@ -122,7 +122,7 @@ public class MainProyecto {
 										precio = bdmenu.devuelve_precio(cod_plato, qPlatos);
 										Vector <Linea_pedido> lPedido = new Vector<Linea_pedido>();
 										lPedido.add(new Linea_pedido(cod_plato, qPlatos, fechaActual, precio));
-
+										bdped.nuevo_pedido(ped, ve)
 
 										break;
 

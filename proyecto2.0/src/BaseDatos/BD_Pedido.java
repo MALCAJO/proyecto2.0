@@ -20,7 +20,7 @@ public class BD_Pedido extends BD_Conecta{
 	//Metodo para generar un pedido
 	public  int nuevo_pedido( Pedido ped, Vector<Linea_pedido> ve){	
 		
-		String cadenaSQL="INSERT INTO pedido VALUES('" + ped.getN_pedido()+ "','" +
+		String cadenaSQL="INSERT INTO pedido(fecha_hora,cod_restaurante,cod_personal,importe_total) VALUES('" +
 		ped.getFecha_pedido()+"','"+ ped.getCod_personal() +"','"+ ped.getCod_restaurante()+"','"+ped.getDireccion_entrega()+"')"; 
 		double importe_total=0;
 		try{
