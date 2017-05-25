@@ -24,8 +24,8 @@ public class MainProyecto {
 		int codpos=0;
 		String direc, regist;
 		String direccion, nombre, apellido;
-		int i=0,filas,telefono=0, codigo = 0,salida=0, cod_plato = 0, qPlatos=0;
-		double precio = 0;
+		int i=0,filas,telefono=0, codigo = 0,salida=0, cod_plato = 0, qPlatos=0, cod_personal=100;
+		double precio = 0, importe=0;
 
 		BD_Menu bdmenu=new BD_Menu("base_propiedades.xml");
 		BD_Restaurante bdrest=new BD_Restaurante("base_propiedades.xml");		
@@ -84,7 +84,8 @@ public class MainProyecto {
 
 								if (direc.equals("SI")){
 									//quitar los syso
-									System.out.println(direccion = usuarior.getDireccion_habitual());
+									direccion = usuarior.getDireccion_habitual();
+									System.out.println(direccion);
 									cod_postal = usuarior.getCod_postal();
 									System.out.println("estos son los restaurantes del codigo postal");
 									Vector <Restaurante> restaurantes=bdrest.listarRestaurantesXzona(cod_postal);
@@ -122,7 +123,8 @@ public class MainProyecto {
 										precio = bdmenu.devuelve_precio(cod_plato, qPlatos);
 										Vector <Linea_pedido> lPedido = new Vector<Linea_pedido>();
 										lPedido.add(new Linea_pedido(cod_plato, qPlatos, fechaActual, precio));
-										bdped.nuevo_pedido(ped, ve)
+										Pedido ped = new Pedido(fechaActual, cod_personal,codigo,direccion);
+										bdped.nuevo_pedido(ped, lPedido);
 
 										break;
 

@@ -11,8 +11,8 @@ public class Pedido {
 	private String direccion_entrega;
 	private double importe_total;
 	
-	public Pedido(int n_pedido, LocalDate fecha_pedido, int cod_personal, int cod_restaurante,
-			String direccion_entrega, double importe_total) {
+	public Pedido(LocalDate fecha_pedido, int cod_personal, int cod_restaurante,
+			String direccion_entrega) {
 		this.n_pedido = n_pedido;
 		this.fecha_pedido = LocalDate.now();
 		this.cod_personal = cod_personal;
