@@ -269,42 +269,42 @@ public class Main_pruebas {
 													}
 												System.out.println("Introduce el código de restaurante para borrarlo de la BBDD.");
 												codres=sc.nextInt();
-												/*filas=bdmenu.borrar_menusXrestaurante(codres);
-												switch(filas){
-												case 0:
+												filas=bdmenu.borrar_menusXrestaurante(codres);												
+												if(filas==0)												
 													System.out.println("No se ha borrado los menus del restaurante");
-													break;
-												case 1:
+													
+												if(filas>1){
 													filas=bdrest.borrar_Restaurante(codres);
 													switch(filas){
 														case 0:
 															System.out.println("No se ha borrado el restaurante");
 															break;
 														case 1:
+															filas=bdusu.borrar_usuario(email);
+															switch(filas){
+																case 0:
+																	System.out.println("No se ha borrado el usuario");
+																	break;
+																case 1:
+																	System.out.println("Usuario borrado de la BBDD");
+																	break;
+																case -1:
+																	System.out.println("Lo sentimo, ha ocurrido un problema durante el proceso. Vuelva a intentarlo.");
+																	break;
+															}
 															System.out.println("Restaurante y menus borrados de la BBDD");
 															break;
 														case -1:
 															System.out.println("Lo sentimo, ha ocurrido un problema durante el proceso. Vuelva a intentarlo.");
 															break;							
 													}
-													
-													break;
-												case -1:
-													System.out.println("Lo sentimo, ha ocurrido un problema durante el registro. Vuelva a intentarlo.");
-													break;							
-												}*/
-												filas=bdrest.borrar_Restaurante(codres);
-												switch(filas){
-													case 0:
-														System.out.println("No se ha borrado el restaurante");
-														break;
-													case 1:
-														System.out.println("Restaurante y menus borrados de la BBDD");
-														break;
-													case -1:
-														System.out.println("Lo sentimo, ha ocurrido un problema durante el proceso. Vuelva a intentarlo.");
-														break;							
 												}
+													
+												if(filas<0)
+													System.out.println("Lo sentimo, ha ocurrido un problema durante el registro. Vuelva a intentarlo.");
+																			
+												
+												
 												break;
 											case 3://opcion para eliminar un usuario de la BBDD
 												sc.nextLine();
