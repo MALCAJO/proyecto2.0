@@ -45,6 +45,7 @@ public class BD_Restaurante extends BD_Conecta{
  * @param nombre
  * @return
  */
+	/**/
 	public String obtener_email(String direccion,String nombre){
 		String cadenaSQL="SELECT email INTO usuario_registrado WHERE nombre='"+nombre +"' AND direccion='"+direccion+"'";
 		String email=null;
