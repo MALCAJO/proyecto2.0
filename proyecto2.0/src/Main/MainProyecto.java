@@ -78,6 +78,7 @@ public class MainProyecto {
 						if (usuarior.getApellidos()==null)
 							System.out.println("el usuario y la contraseña no coinciden");
 						else{
+//TIPO USUARIO
 							if(usuarior.getTipo().equals("usuar")){
 								do{
 									System.out.println("quieres realizar el pedido en tu direccion habitual? ");
@@ -125,12 +126,10 @@ public class MainProyecto {
 										precio = bdmenu.devuelve_precio(cod_plato, qPlatos);
 										
 										lPedido.add(new Linea_pedido(cod_plato, qPlatos, fechaActual, precio));
-										
 
 										break;
 
 									case 2:
-										
 										
 										for(i=0;i<lPedido.size();i++)
 											System.out.println(i+1+" "+lPedido.get(i).toString());
@@ -149,10 +148,7 @@ public class MainProyecto {
 										bdped.nuevo_pedido(ped, lPedido);
 										
 										break;
-									case 4:
-
-
-										break;
+									
 									}
 
 								}else{
@@ -186,6 +182,7 @@ public class MainProyecto {
 
 
 										}}}}}
+//TIPO ADMIN
 					if(usuarior.getTipo().equals("admin")){
 						do{
 							System.out.println("Opciones:");
@@ -403,6 +400,7 @@ public class MainProyecto {
 					}
 
 					else{
+//TIPO RESTAURANTE
 						if(usuarior.getTipo().equals("resta")){
 							try{
 								do{
