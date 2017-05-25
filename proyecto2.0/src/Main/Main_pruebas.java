@@ -409,13 +409,6 @@ public class Main_pruebas {
 					break;
 					
 					
-					
-					
-					
-					
-					
-					
-					
 				case 2://Para darte de alta en la aplicación 
 					
 					//email, contraseña,nombre, apellido,direccion,cod postal y codigo_oferta=1"la de bienvenida"
