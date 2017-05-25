@@ -5,10 +5,8 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.Vector;
 
-import BaseDatos.BD_Menu;
-import BaseDatos.BD_Pedido;
-import BaseDatos.BD_Restaurante;
-import BaseDatos.BD_Usuario;
+import BaseDatos.*;
+
 import modelos.*;
 
 
@@ -33,6 +31,9 @@ public class MainProyecto {
 		BD_Restaurante bdrest=new BD_Restaurante("base_propiedades.xml");		
 		BD_Usuario bdusu=new BD_Usuario("base_propiedades.xml");		
 		BD_Pedido bdped=new BD_Pedido("base_propiedades.xml");
+		BD_Empleado bdemp=new BD_Empleado("base_propiedades.xml");
+		BD_Oferta bdof=new BD_Oferta("base_propiedades.xml");
+		BD_Vehiculo bdveh=new BD_Vehiculo("base_propiedades.xml");
 
 		do {
 			try {
@@ -75,100 +76,353 @@ public class MainProyecto {
 						if (usuarior.getApellidos()==null)
 							System.out.println("el usuario y la contraseña no coinciden");
 						else{
-							do{
-								System.out.println("quieres realizar el pedido en tu direccion habitual? ");
-								direc = br.readLine().toUpperCase();
-							}while(!direc.equals("SI")&!direc.equals("NO"));
-
-							if (direc.equals("SI")){
-								//quitar los syso
-								System.out.println(direccion = usuarior.getDireccion_habitual());
-								cod_postal = usuarior.getCod_postal();
-								System.out.println("estos son los restaurantes del codigo postal");
-								Vector <Restaurante> restaurantes=bdrest.listarRestaurantesXzona(cod_postal);
-								for (i=0;i<restaurantes.size();i++)
-									System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
-
-								System.out.println("que restaurante quieres, escribe su codigo?");
-								codigo = Integer.parseInt(br.readLine());
-								Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
-								System.out.println(menus);
-								if(menus.size()==0){
-									System.out.println("todavia no se han dado de alta menus");
-								}
-								try{
+							if(usuarior.getTipo().equals("usuar")){
 								do{
-									System.out.println("1. agregar plato del menu");
-									System.out.println("2. quitar plato del menu");
-									System.out.println("3. confirmar pedido");
-									System.out.println("4. salida");
-									salida = Integer.parseInt(br.readLine());
-								}while(salida==4);
-								}catch(NumberFormatException e){
-									System.out.println(e.getMessage());
-								}
-								
-								switch(salida){
-								
-								case 1:
-									
-									LocalDate fechaActual = LocalDate.now();
-									System.out.println("que plato quieres? dime el codigo del plato");
-									cod_plato = Integer.parseInt(br.readLine());
-									System.out.println("cuantos platos quieres?");
-									qPlatos = Integer.parseInt(br.readLine());
-									precio = 
-									Vector <Linea_pedido> lPedido = new Vector<Linea_pedido>(cod_plato,qPlatos,fechaActual,precio);
-									//prueba
-									break;
-									
-								case 2:
-									
-									
-									break;
-								case 3:
-									
-									
-									break;
-								case 4:
-									
-									
-									break;
-								}
-								
-							}else{
+									System.out.println("quieres realizar el pedido en tu direccion habitual? ");
+									direc = br.readLine().toUpperCase();
+								}while(!direc.equals("SI")&!direc.equals("NO"));
 
-								if(direc.equals("NO")){
+								if (direc.equals("SI")){
+									//quitar los syso
+									System.out.println(direccion = usuarior.getDireccion_habitual());
+									cod_postal = usuarior.getCod_postal();
+									System.out.println("estos son los restaurantes del codigo postal");
+									Vector <Restaurante> restaurantes=bdrest.listarRestaurantesXzona(cod_postal);
+									for (i=0;i<restaurantes.size();i++)
+										System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
+
+									System.out.println("que restaurante quieres, escribe su codigo?");
+									codigo = Integer.parseInt(br.readLine());
+									Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
+									System.out.println(menus);
+									if(menus.size()==0){
+										System.out.println("todavia no se han dado de alta menus");
+									}
 									try{
 										do{
-											System.out.println("dime un codigo postal: ");
-											codpos = Integer.parseInt(br.readLine());
-										}while(codpos<0 || codpos>99999);
+											System.out.println("1. agregar plato del menu");
+											System.out.println("2. quitar plato del menu");
+											System.out.println("3. confirmar pedido");
+											System.out.println("4. salida");
+											salida = Integer.parseInt(br.readLine());
+										}while(salida==4);
 									}catch(NumberFormatException e){
 										System.out.println(e.getMessage());
 									}
-									Vector <Restaurante> restaurantes=bdrest.listarRestaurantesXzona(codpos);
-									if (restaurantes==null){
-										System.out.println("En este momento no podemos realizar la operación");
 
-									}else{
-										System.out.println("Listado de restaurantes");
-										for (i=0;i<restaurantes.size();i++)
-											System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
+									switch(salida){
+
+									case 1:
+
+										LocalDate fechaActual = LocalDate.now();
+										System.out.println("que plato quieres? dime el codigo del plato");
+										cod_plato = Integer.parseInt(br.readLine());
+										System.out.println("cuantos platos quieres?");
+										qPlatos = Integer.parseInt(br.readLine());
+										precio = bdmenu.devuelve_precio(cod_plato, qPlatos);
+										Vector <Linea_pedido> lPedido = new Vector<Linea_pedido>();
+										lPedido.add(new Linea_pedido(cod_plato, qPlatos, fechaActual, precio));
+
+
+										break;
+
+									case 2:
+
+
+
+										break;
+									case 3:
+
+
+										break;
+									case 4:
+
+
+										break;
+									}
+
+								}else{
+
+									if(direc.equals("NO")){
 										try{
-										System.out.println("que restaurante quieres, escribe su codigo?");
-										codigo = Integer.parseInt(br.readLine());
+											do{
+												System.out.println("dime un codigo postal: ");
+												codpos = Integer.parseInt(br.readLine());
+											}while(codpos<0 || codpos>99999);
 										}catch(NumberFormatException e){
 											System.out.println(e.getMessage());
 										}
-										Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
-										System.out.println(menus);
-										
-										
-										
-									}}}}
+										Vector <Restaurante> restaurantes=bdrest.listarRestaurantesXzona(codpos);
+										if (restaurantes==null){
+											System.out.println("En este momento no podemos realizar la operación");
 
-					break;
+										}else{
+											System.out.println("Listado de restaurantes");
+											for (i=0;i<restaurantes.size();i++)
+												System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
+											try{
+												System.out.println("que restaurante quieres, escribe su codigo?");
+												codigo = Integer.parseInt(br.readLine());
+											}catch(NumberFormatException e){
+												System.out.println(e.getMessage());
+											}
+											Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
+											System.out.println(menus);
+
+
+
+										}}}}}
+					if(usuarior.getTipo().equals("admin")){
+						do{
+							System.out.println("Opciones:");
+							System.out.println("1- Añadir nuevo restaurante.");
+							System.out.println("2- Borrar restaurante.");
+							System.out.println("3- Borrar usuario.");
+							System.out.println("4- Dar de alta a un nuevo empleado+vehículo.");
+							System.out.println("5- Dar de baja a un empleado+vehículo.");										
+							System.out.println("6- Añadir una oferta.");
+							System.out.println("7- Borrar una oferta.");
+							System.out.println("8- Modificar una matrícula.");
+							System.out.println("9- Logout.");
+							menu=Integer.parseInt(br.readLine());
+							switch(menu){
+							case 1://opcion para añadir un nuevo restaurante a la BBDD
+
+								System.out.println("Nombre del restaurante: ");
+								nombre= br.readLine();
+								System.out.println("Tipo de comida");
+								String tipo_comida=br.readLine();
+								System.out.println("Dirección");
+								direccion=br.readLine();
+								do{	
+									System.out.println("Email: ");//hacer comprobacion de email.
+									email=br.readLine();
+									filas=bdusu.comprobar_email(email);
+									switch(filas){
+									case 0:
+										System.out.println("Email disponible.");
+										break;
+									case 1:
+										System.out.println("El email introducido ya pertenece a un usuario registrado");
+										break;
+									case -1:
+										System.out.println("Lo sentimo, ha ocurrido un problema durante el registro. Vuelva a intentarlo.");
+										break;							
+									}
+								}while(filas!=0);
+								System.out.println("Contraseña que quieres usar.");
+								contrasena=br.readLine();
+								System.out.println("cif:");
+								String cif=br.readLine();;
+								System.out.println("Código postal:");
+								cod_postal=Integer.parseInt(br.readLine());
+								System.out.println("Teléfono:");
+								telefono=Integer.parseInt(br.readLine());
+								String tipo="resta";
+								//primero genero un nuevo objeto restaurante y lo se lo paso al metodo para añadirlo a la BBDD
+								Restaurante resta=new Restaurante(direccion,cod_postal,telefono,cif,nombre);
+								filas=bdrest.añadir_Restaurante(resta);
+								switch(filas){
+								case 1://si  se añade con exito le creo un usuario a ese restaurante para que pueda operar 
+									Usu_Registrado usu=new Usu_Registrado(direccion, telefono,email, cod_postal, nombre, tipo_comida, contrasena, direccion, 2,tipo);
+									filas=bdusu.alta_usuario(usu);
+									switch(filas){
+									case 1:	
+										System.out.println("Registro de restaurante y su usuario completado con exito");
+										break;
+									case 0:
+										System.out.println("El usuario del restaurante no se ha podido realizar.");
+										break;
+									case -1:
+										System.out.println("Lo sentimo, ha ocurrido un problema durante el registro del usuario. Vuelva a intentarlo.");
+										break;							
+									}
+									break;
+								case 0:
+									System.out.println("El registro del restaurante no se ha podido realizar.");
+									break;
+								case -1:
+									System.out.println("Lo sentimo, ha ocurrido un problema durante el registro del restaurante. Vuelva a intentarlo.");
+									break;							
+								}
+
+								break;
+							case 2://opcion para borrar un restaurante mediante el codigo del mismo
+								// listo todo los restaurantes y selecciono uno de ellos para borrarlo
+								Vector <Restaurante> restaurantes=bdrest.listarRestaurantes();
+								if (restaurantes==null){
+									System.out.println("En este momento no podemos realizar la operación");
+
+								}else{
+									System.out.println("Listado de restaurantes");
+									for (i=0;i<restaurantes.size();i++)
+										System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
+								}
+								System.out.println("Introduce el código de restaurante para borrarlo de la BBDD.");
+								codres=Integer.parseInt(br.readLine());
+								filas=bdmenu.borrar_menusXrestaurante(codres);												
+								if(filas==0)												
+									System.out.println("No se ha borrado los menus del restaurante");
+
+								if(filas>=1){
+
+									filas=bdrest.borrar_Restaurante(codres);
+									switch(filas){
+									case 0:
+										System.out.println("No se ha borrado el restaurante");
+										break;
+									case 1:
+										filas=bdusu.borrar_usuario(email);
+										switch(filas){
+										case 0:
+											System.out.println("No se ha borrado el usuario");
+											break;
+										case 1:
+											System.out.println("Usuario borrado de la BBDD");
+											break;
+										case -1:
+											System.out.println("Lo sentimo, ha ocurrido un problema durante el proceso. Vuelva a intentarlo.");
+											break;
+										}
+										System.out.println("Restaurante y menus borrados de la BBDD");
+										break;
+									case -1:
+										System.out.println("Lo sentimo, ha ocurrido un problema durante el proceso. Vuelva a intentarlo.");
+										break;							
+									}
+								}
+
+								if(filas<0)
+									System.out.println("Lo sentimo, ha ocurrido un problema durante el registro. Vuelva a intentarlo.");
+
+
+
+								break;
+							case 3://opcion para eliminar un usuario de la BBDD
+
+								System.out.println("Introduce el email del usuario que quieres eliminar:");
+								email=br.readLine();
+								filas=bdusu.borrar_usuario(email);
+								switch(filas){
+								case 0:
+									System.out.println("No se ha borrado el usuario");
+									break;
+								case 1:
+									System.out.println("Usuario borrado de la BBDD");
+									break;
+								case -1:
+									System.out.println("Lo sentimo, ha ocurrido un problema durante el proceso. Vuelva a intentarlo.");
+									break;
+								}
+								break;
+							case 4://dar de alta un nuevo empleado y su respectivo vehículo
+
+								System.out.println("Introduce nombre");
+								nombre=br.readLine();
+								System.out.println("Apellido");
+								apellido=br.readLine();
+								System.out.println("DNI");
+								String dni=br.readLine();									
+								LocalDate fechaActual = LocalDate.now();
+								Empleado emple=new Empleado(nombre,apellido,dni,fechaActual);
+								filas=bdemp.altaEmpleado(emple);
+								switch(filas){
+								case 0:
+									System.out.println("No se ha realizado el alta");
+									break;
+								case 1:
+									System.out.println("Alta realizada con éxito");														
+									break;
+								case -1:
+									System.out.println("Ha ocurrido un error, vuelva ha intentarlo más tarde.");
+									break;
+								}
+								if (filas==1){
+									System.out.println("Introduce la matricula del vehiculo que usará el empleado:");
+									String matricula=br.readLine();
+									int cod_emple=bdemp.buscar_empleXdni(dni);
+									Vehiculo vehi=new Vehiculo(matricula,cod_emple);
+									filas=bdveh.altaVehiculo(vehi);
+									switch(filas){
+									case 0:
+										System.out.println("No se ha podido añadir el vehículo.");
+										break;
+									case 1:
+										System.out.println("Vehículo añadido con éxito");														
+										break;
+									case -1:
+										System.out.println("Ha ocurrido un error, vuelva ha intentarlo más tarde.");
+										break;
+									}
+								}
+
+								break;
+							case 5://dar de baja a un empleado
+								System.out.println("Introduce el codigo del empleado:");
+								int cod_emple=Integer.parseInt(br.readLine());
+								filas=bdemp.bajaEmpleado(cod_emple);
+								switch(filas){
+								case 0:
+									System.out.println("No se ha realizado la baja");
+									break;
+								case 1:
+									System.out.println("Baja realizada con éxito");
+									break;
+								case -1:
+									System.out.println("Ha ocurrido un error, vuelva ha intentarlo más tarde.");
+									break;
+								}
+								break;
+							case 6:
+								break;
+							case 7:
+								break;
+							case 8:
+								break;
+							case 9:
+								System.out.println("Hasta otra");
+								break;
+							default:
+								System.out.println("En serio?? pon bien la opcion");
+							}
+						}while(menu!=9);
+					}
+
+					else{
+						if(usuarior.getTipo().equals("resta")){
+							try{
+								do{
+									//con nombre y direccion obtener cod rest
+									System.out.println("1. añadir menu");
+									System.out.println("2. borrar menu");
+									System.out.println("3. cambiar precio");
+									System.out.println("4. logout");
+									salida = Integer.parseInt(br.readLine());
+								}while(salida!=4);
+							}catch(NumberFormatException e){
+								System.out.println(e.getMessage());
+							}
+							switch(salida){
+							case 1:
+
+								break;
+
+							case 2:
+
+								break;
+
+							case 3:
+
+								break;
+
+							case 4:
+
+								break;
+
+							default:
+								break;
+							}
+						}}
 
 				}
 				//usuario no registrado
@@ -191,10 +445,10 @@ public class MainProyecto {
 							System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
 						System.out.print("dime el restaurante que quieres");
 						codres = Integer.parseInt(br.readLine());
-						
-						
-						
-						
+
+
+
+
 					}
 					break;
 				}
@@ -264,7 +518,7 @@ public class MainProyecto {
 
 
 				//prueba
-				
+
 				break;
 
 			}
