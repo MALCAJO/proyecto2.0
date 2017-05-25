@@ -39,6 +39,26 @@ public class BD_Restaurante extends BD_Conecta{
 			return -1;
 		}
 	}
+	
+	public String obtener_email(String direccion,String nombre){
+		String cadenaSQL="SELECT email INTO usuario_registrado WHERE nombre='"+nombre +"' AND direccion='"+direccion+"'";
+		String email=null;
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);	
+			if ( reg.next()){
+				email=reg.getString("email");
+			}
+			s.close();
+			this.cerrar();
+			return email;			
+		}
+		catch ( SQLException e){
+			this.cerrar();
+			return null;
+		}
+	}
 /**
  * Método para borrar un restaurante.
  * @param codRestaurante
