@@ -24,8 +24,10 @@ public class MainProyecto {
 		int codpos=0;
 		String direc, regist;
 		String direccion, nombre, apellido;
-		int i=0,filas,telefono=0, codigo = 0,salida=0, cod_plato = 0, qPlatos=0, cod_personal=100;
+		int i=0,filas,telefono=0, codigo = 0,salida=0, cod_plato = 0, qPlatos=0, cod_personal=100,pos=0;
 		double precio = 0, importe=0;
+		LocalDate fechaActual = LocalDate.now();
+		Vector <Linea_pedido> lPedido = new Vector<Linea_pedido>();
 
 		BD_Menu bdmenu=new BD_Menu("base_propiedades.xml");
 		BD_Restaurante bdrest=new BD_Restaurante("base_propiedades.xml");		
@@ -115,27 +117,37 @@ public class MainProyecto {
 
 									case 1:
 
-										LocalDate fechaActual = LocalDate.now();
+										
 										System.out.println("que plato quieres? dime el codigo del plato");
 										cod_plato = Integer.parseInt(br.readLine());
 										System.out.println("cuantos platos quieres?");
 										qPlatos = Integer.parseInt(br.readLine());
 										precio = bdmenu.devuelve_precio(cod_plato, qPlatos);
-										Vector <Linea_pedido> lPedido = new Vector<Linea_pedido>();
+										
 										lPedido.add(new Linea_pedido(cod_plato, qPlatos, fechaActual, precio));
-										Pedido ped = new Pedido(fechaActual, cod_personal,codigo,direccion);
-										bdped.nuevo_pedido(ped, lPedido);
+										
 
 										break;
 
 									case 2:
-
-
+										
+										
+										for(i=0;i<lPedido.size();i++)
+											System.out.println(i+1+" "+lPedido.get(i).toString());
+										System.out.println("que platos quieres quitar? dime el codigo");
+										pos = Integer.parseInt(br.readLine());
+										lPedido.remove(pos);
 
 										break;
 									case 3:
-
-
+										
+										System.out.println("tu pedido");
+										for(i=0;i<lPedido.size();i++)
+											System.out.println(lPedido.get(i).toString());
+										
+										Pedido ped = new Pedido(fechaActual, cod_personal,codigo,direccion);
+										bdped.nuevo_pedido(ped, lPedido);
+										
 										break;
 									case 4:
 
@@ -226,7 +238,7 @@ public class MainProyecto {
 								filas=bdrest.añadir_Restaurante(resta);
 								switch(filas){
 								case 1://si  se añade con exito le creo un usuario a ese restaurante para que pueda operar 
-									Usu_Registrado usu=new Usu_Registrado(direccion, telefono,email, cod_postal, nombre, tipo_comida, contrasena, direccion, 2,tipo);
+									Usu_Registrado usu=new Usu_Registrado(direccion, telefono,email, cod_postal, nombre, tipo_comida, contrasena, direccion, 1,tipo);
 									filas=bdusu.alta_usuario(usu);
 									switch(filas){
 									case 1:	
@@ -325,7 +337,7 @@ public class MainProyecto {
 								apellido=br.readLine();
 								System.out.println("DNI");
 								String dni=br.readLine();									
-								LocalDate fechaActual = LocalDate.now();
+								
 								Empleado emple=new Empleado(nombre,apellido,dni,fechaActual);
 								filas=bdemp.altaEmpleado(emple);
 								switch(filas){

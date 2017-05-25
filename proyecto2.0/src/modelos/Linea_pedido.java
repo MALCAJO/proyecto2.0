@@ -66,5 +66,14 @@ public class Linea_pedido {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+	@Override
+	public String toString() {
+		return "Linea_pedido [n_pedido=" + n_pedido + ", n_plato=" + n_plato + ", cantidad=" + cantidad
+				+ ", fecha_hora=" + fecha_hora + ", precio=" + precio + "]";
+	}
+	
+	
+	
+	
 	
 }
