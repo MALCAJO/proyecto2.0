@@ -119,7 +119,7 @@ public class MainProyecto {
 									qPlatos = Integer.parseInt(br.readLine());
 									precio = 
 									Vector <Linea_pedido> lPedido = new Vector<Linea_pedido>(cod_plato,qPlatos,fechaActual,precio);
-									
+									//prueba
 									break;
 									
 								case 2:
