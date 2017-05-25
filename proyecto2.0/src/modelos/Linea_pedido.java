@@ -10,7 +10,7 @@ public class Linea_pedido {
 	private LocalDate fecha_hora;
 	private double precio;
 	
-	public Linea_pedido(int n_pedido, int n_plato, int cantidad, LocalDate fecha_hora, double precio) {
+	public Linea_pedido(int n_plato, int cantidad, LocalDate fecha_hora) {
 		super();
 		this.n_pedido = n_pedido;
 		this.n_plato = n_plato;
