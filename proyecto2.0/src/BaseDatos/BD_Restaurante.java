@@ -34,7 +34,7 @@ public class BD_Restaurante extends BD_Conecta{
 			this.cerrar();
 			return filas;
 		}
-		catch ( SQLException e){
+		catch ( SQLException e){ 
 			this.cerrar();
 			return -1;
 		}
