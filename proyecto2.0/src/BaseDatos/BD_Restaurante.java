@@ -72,7 +72,7 @@ public class BD_Restaurante extends BD_Conecta{
  * 
  */
 	public int borrar_Restaurante(int codRestaurante){
-		String cadenaSQL="DELETE FROM restaurante WHERE `email` = '" + codRestaurante+"' ";
+		String cadenaSQL="DELETE FROM restaurante WHERE `cod_restaurante` = '" + codRestaurante+"' ";
 		try{
 			this.abrir();
 			s=c.createStatement();

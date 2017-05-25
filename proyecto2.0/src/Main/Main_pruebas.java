@@ -233,7 +233,7 @@ public class Main_pruebas {
 												filas=bdrest.añadir_Restaurante(resta);
 												switch(filas){
 													case 1://si  se añade con exito le creo un usuario a ese restaurante para que pueda operar 
-														Usu_Registrado usu=new Usu_Registrado(direccion, telefono,email, cod_postal, nombre, tipo_comida, contrasena, direccion, 2,tipo);
+														Usu_Registrado usu=new Usu_Registrado(direccion, telefono,email, cod_postal, nombre, tipo_comida, contrasena, direccion,1,tipo);
 														filas=bdusu.alta_usuario(usu);
 														switch(filas){
 														case 1:	
@@ -275,6 +275,10 @@ public class Main_pruebas {
 													
 												if(filas>=1){
 													
+													for(i=0;i<restaurantes.size();i++){
+														if(codres==restaurantes.get(i).getCod_restaurante())
+															email=bdrest.obtener_email(restaurantes.get(i).getDireccion(), restaurantes.get(i).getNombre());
+													}
 													filas=bdrest.borrar_Restaurante(codres);
 													switch(filas){
 														case 0:
