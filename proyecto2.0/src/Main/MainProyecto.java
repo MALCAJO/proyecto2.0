@@ -295,7 +295,7 @@ public class MainProyecto {
 								String tipo="resta";
 								//primero genero un nuevo objeto restaurante y lo se lo paso al metodo para añadirlo a la BBDD
 								Restaurante resta=new Restaurante(direccion,cod_postal,telefono,cif,nombre);
-								filas=bdrest.añadir_Restaurante(resta);
+								filas=bdrest.a�adir_Restaurante(resta);
 								switch(filas){
 								case 1://si  se añade con exito le creo un usuario a ese restaurante para que pueda operar 
 									Usu_Registrado usu=new Usu_Registrado(direccion, telefono,email, cod_postal, nombre, tipo_comida, contrasena, direccion, 1,tipo);
@@ -471,7 +471,7 @@ public class MainProyecto {
 								descripcion = br.readLine();
 								
 								Oferta ofer= new Oferta(cod_oferta,descuento,descripcion);
-								filas=bdof.añadir_oferta(ofer);
+								filas=bdof.a�adir_oferta(ofer);
 								
 								switch(filas){
 								
@@ -573,7 +573,7 @@ public class MainProyecto {
 								System.out.println("dime el nombre del plato");
 								nombre = br.readLine();
 								
-								filas = bdmenu.añadir_menu(codres, precio, nombre);
+								filas = bdmenu.a�adir_menu(codres, precio, nombre);
 								
 								switch(filas){
 								
