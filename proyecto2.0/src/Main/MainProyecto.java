@@ -78,7 +78,7 @@ public class MainProyecto {
 						if (usuarior.getApellidos()==null)
 							System.out.println("el usuario y la contraseña no coinciden");
 						else{
-//TIPO USUARIO
+							//TIPO USUARIO
 							if(usuarior.getTipo().equals("usuar")){
 								do{
 									System.out.println("quieres realizar el pedido en tu direccion habitual? ");
@@ -102,54 +102,56 @@ public class MainProyecto {
 									if(menus.size()==0){
 										System.out.println("todavia no se han dado de alta menus");
 									}
-									try{
-										do{
+
+									do{
+										try{
 											System.out.println("1. agregar plato del menu");
 											System.out.println("2. quitar plato del menu");
 											System.out.println("3. confirmar pedido");
 											System.out.println("4. salida");
 											salida = Integer.parseInt(br.readLine());
-										}while(salida==4);
-									}catch(NumberFormatException e){
-										System.out.println(e.getMessage());
-									}
 
-									switch(salida){
+										}catch(NumberFormatException e){
+											System.out.println(e.getMessage());
+										}
 
-									case 1:
+										switch(salida){
 
-										
-										System.out.println("que plato quieres? dime el codigo del plato");
-										cod_plato = Integer.parseInt(br.readLine());
-										System.out.println("cuantos platos quieres?");
-										qPlatos = Integer.parseInt(br.readLine());
-										precio = bdmenu.devuelve_precio(cod_plato, qPlatos);
-										
-										lPedido.add(new Linea_pedido(cod_plato, qPlatos, fechaActual, precio));
+										case 1:
 
-										break;
 
-									case 2:
-										
-										for(i=0;i<lPedido.size();i++)
-											System.out.println(i+1+" "+lPedido.get(i).toString());
-										System.out.println("que platos quieres quitar? dime el codigo");
-										pos = Integer.parseInt(br.readLine());
-										lPedido.remove(pos);
+											System.out.println("que plato quieres? dime el codigo del plato");
+											cod_plato = Integer.parseInt(br.readLine());
+											System.out.println("cuantos platos quieres?");
+											qPlatos = Integer.parseInt(br.readLine());
+											precio = bdmenu.devuelve_precio(cod_plato, qPlatos);
+											System.out.println(precio+ " este es el precio del plato por cantidad");
+											lPedido.add(new Linea_pedido(cod_plato, qPlatos, fechaActual, precio));
 
-										break;
-									case 3:
-										
-										System.out.println("tu pedido");
-										for(i=0;i<lPedido.size();i++)
-											System.out.println(lPedido.get(i).toString());
-										
-										Pedido ped = new Pedido(fechaActual, cod_personal,codigo,direccion);
-										bdped.nuevo_pedido(ped, lPedido);
-										
-										break;
-									
-									}
+											break;
+
+										case 2:
+
+											for(i=0;i<lPedido.size();i++)
+												System.out.println(i+1+" "+lPedido.get(i).toString());
+											System.out.println("que platos quieres quitar? dime el codigo");
+											pos = Integer.parseInt(br.readLine());
+											lPedido.remove(pos);
+
+											break;
+										case 3:
+
+											System.out.println("tu pedido");
+											for(i=0;i<lPedido.size();i++)
+												System.out.println(lPedido.get(i).toString());
+
+											Pedido ped = new Pedido(fechaActual, cod_personal,codigo,direccion);
+											bdped.nuevo_pedido(ped, lPedido);
+
+											break;
+
+										}
+									}while(salida!=4);
 
 								}else{
 
@@ -182,7 +184,7 @@ public class MainProyecto {
 
 
 										}}}}}
-//TIPO ADMIN
+					//TIPO ADMIN
 					if(usuarior.getTipo().equals("admin")){
 						do{
 							System.out.println("Opciones:");
@@ -334,7 +336,7 @@ public class MainProyecto {
 								apellido=br.readLine();
 								System.out.println("DNI");
 								String dni=br.readLine();									
-								
+
 								Empleado emple=new Empleado(nombre,apellido,dni,fechaActual);
 								filas=bdemp.altaEmpleado(emple);
 								switch(filas){
@@ -400,7 +402,7 @@ public class MainProyecto {
 					}
 
 					else{
-//TIPO RESTAURANTE
+						//TIPO RESTAURANTE
 						if(usuarior.getTipo().equals("resta")){
 							try{
 								do{
@@ -465,10 +467,10 @@ public class MainProyecto {
 					break;
 				}
 
+				break;
 
 
-
-
+//SALTA AQUI
 			case 2:
 
 				System.out.println("A continuación te pediremos los datos para poder realizar el registro.");
