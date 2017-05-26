@@ -16,8 +16,7 @@ public class BD_Vehiculo extends BD_Conecta{
 	}
 
 	public int altaVehiculo(Vehiculo ve){
-		String cadenaSQL="INSERT INTO vehiculo  VALUES('" + ve.getMatricula() +"','"+ve.getCod_personal()+"' " +
-				ve.getCod_personal()+"')"; 	
+		String cadenaSQL="INSERT INTO vehiculo  VALUES('" + ve.getMatricula() +"','"+ve.getCod_personal()+"' ";	
 		try{
 			this.abrir();
 			s=c.createStatement();

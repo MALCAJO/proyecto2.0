@@ -69,7 +69,7 @@ public class MainProyecto {
 					System.out.println("login");
 					System.out.println("email:");
 					email = br.readLine();
-					System.out.println("contraseña:");
+					System.out.println("contrase�a:");
 					contrasena = br.readLine();
 					Usu_Registrado usuarior = bdusu.verificar_login(email, contrasena);
 
@@ -111,8 +111,8 @@ public class MainProyecto {
 										try{
 											System.out.println("1. agregar plato del menu");
 											System.out.println("2. quitar plato del menu");
-											System.out.println("3. confirmar pedido");
-											System.out.println("4. salida");
+											System.out.println("3. confirmar pedido y finalizar");
+											
 											salida = Integer.parseInt(br.readLine());
 
 										}catch(NumberFormatException e){
@@ -138,9 +138,13 @@ public class MainProyecto {
 
 											for(i=0;i<lPedido.size();i++)
 												System.out.println(i+1+" "+lPedido.get(i).toString());
+											try{
 											System.out.println("que platos quieres quitar? dime el codigo");
 											pos = Integer.parseInt(br.readLine());
-											lPedido.remove(pos);
+											}catch(NumberFormatException e){
+												System.out.println(e.getMessage());
+											}
+											lPedido.remove(pos-1);
 
 											break;
 										case 3:
@@ -151,11 +155,11 @@ public class MainProyecto {
 
 											Pedido ped = new Pedido(fechaActual, cod_personal,codigo,direccion);
 											bdped.nuevo_pedido(ped, lPedido);
-
+											System.out.println("tu pedido ha sido realizado con exito");
 											break;
 
 										}
-									}while(salida!=4);
+									}while(salida!=3);
 
 								}else{
 
@@ -196,8 +200,7 @@ public class MainProyecto {
 												try{
 													System.out.println("1. agregar plato del menu");
 													System.out.println("2. quitar plato del menu");
-													System.out.println("3. confirmar pedido");
-													System.out.println("4. salida");
+													System.out.println("3. confirmar pedido y finalizar");
 													salida = Integer.parseInt(br.readLine());
 
 												}catch(NumberFormatException e){
@@ -236,11 +239,12 @@ public class MainProyecto {
 
 													Pedido ped = new Pedido(fechaActual, cod_personal,codigo,direccion);
 													bdped.nuevo_pedido(ped, lPedido);
-
+													System.out.println("tu pedido ha sido realizado con exito");
+													
 													break;
 
 												}
-											}while(salida!=4);
+											}while(salida!=3);
 
 
 										}}}}}
@@ -248,14 +252,14 @@ public class MainProyecto {
 					if(usuarior.getTipo().equals("admin")){
 						do{
 							System.out.println("Opciones:");
-							System.out.println("1- Añadir nuevo restaurante.");
+							System.out.println("1- A�adir nuevo restaurante.");
 							System.out.println("2- Borrar restaurante.");
 							System.out.println("3- Borrar usuario.");
-							System.out.println("4- Dar de alta a un nuevo empleado+vehículo.");
-							System.out.println("5- Dar de baja a un empleado+vehículo.");										
-							System.out.println("6- Añadir una oferta.");
+							System.out.println("4- Dar de alta a un nuevo empleado+vehiculo.");
+							System.out.println("5- Dar de baja a un empleado+vehiculo.");										
+							System.out.println("6- A�adir una oferta.");
 							System.out.println("7- Borrar una oferta.");
-							System.out.println("8- Modificar una matrícula.");
+							System.out.println("8- Modificar una matricula.");
 							System.out.println("9- Logout.");
 							menu=Integer.parseInt(br.readLine());
 							switch(menu){
@@ -265,7 +269,7 @@ public class MainProyecto {
 								nombre= br.readLine();
 								System.out.println("Tipo de comida");
 								String tipo_comida=br.readLine();
-								System.out.println("Dirección");
+								System.out.println("Direccion");
 								direccion=br.readLine();
 								do{	
 									System.out.println("Email: ");//hacer comprobacion de email.
@@ -284,13 +288,13 @@ public class MainProyecto {
 									}
 								}while(filas!=0);
 								
-								System.out.println("Contraseña que quieres usar.");
+								System.out.println("Contrase�a que quieres usar.");
 								contrasena=br.readLine();
 								System.out.println("cif:");
 								String cif=br.readLine();
-								System.out.println("Código postal:");
+								System.out.println("Codigo postal:");
 								cod_postal=Integer.parseInt(br.readLine());
-								System.out.println("Teléfono:");
+								System.out.println("Telefono:");
 								telefono=Integer.parseInt(br.readLine());
 								String tipo="resta";
 								//primero genero un nuevo objeto restaurante y lo se lo paso al metodo para añadirlo a la BBDD
@@ -325,14 +329,14 @@ public class MainProyecto {
 								// listo todo los restaurantes y selecciono uno de ellos para borrarlo
 								Vector <Restaurante> restaurantes=bdrest.listarRestaurantes();
 								if (restaurantes==null){
-									System.out.println("En este momento no podemos realizar la operación");
+									System.out.println("En este momento no podemos realizar la operacion");
 
 								}else{
 									System.out.println("Listado de restaurantes");
 									for (i=0;i<restaurantes.size();i++)
 										System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
 								}
-								System.out.println("Introduce el código de restaurante para borrarlo de la BBDD.");
+								System.out.println("Introduce el codigo de restaurante para borrarlo de la BBDD.");
 								codres=Integer.parseInt(br.readLine());
 								filas=bdmenu.borrar_menusXrestaurante(codres);												
 								if(filas==0)												
@@ -406,15 +410,15 @@ public class MainProyecto {
 									System.out.println("No se ha realizado el alta");
 									break;
 								case 1:
-									System.out.println("Alta realizada con éxito");														
+									System.out.println("Alta realizada con exito");														
 									break;
 								case -1:
-									System.out.println("Ha ocurrido un error, vuelva ha intentarlo más tarde.");
+									System.out.println("Ha ocurrido un error, vuelva ha intentarlo mas tarde.");
 									break;
 								}
 								if (filas==1){
 									
-									System.out.println("Introduce la matricula del vehiculo que usará el empleado:");
+									System.out.println("Introduce la matricula del vehiculo que usara el empleado:");
 									matricula=br.readLine();
 									int cod_emple=bdemp.buscar_empleXdni(dni);
 									Vehiculo vehi=new Vehiculo(matricula,cod_emple);
@@ -422,10 +426,10 @@ public class MainProyecto {
 									switch(filas){
 									
 									case 0:
-										System.out.println("No se ha podido añadir el vehículo.");
+										System.out.println("No se ha podido a�adir el vehiculo.");
 										break;
 									case 1:
-										System.out.println("Vehículo añadido con éxito");														
+										System.out.println("Vehiculo a�adido con exito");														
 										break;
 									case -1:
 										System.out.println("Ha ocurrido un error, vuelva ha intentarlo más tarde.");
@@ -554,7 +558,7 @@ public class MainProyecto {
 							try{
 								do{
 									//con nombre y direccion obtener cod rest
-									System.out.println("1. añadir menu");
+									System.out.println("1. a�adir menu");
 									System.out.println("2. borrar menu");
 									System.out.println("3. cambiar precio");
 									System.out.println("4. logout");
@@ -674,8 +678,8 @@ public class MainProyecto {
 							try{
 								System.out.println("1. agregar plato del menu");
 								System.out.println("2. quitar plato del menu");
-								System.out.println("3. confirmar pedido");
-								System.out.println("4. salida");
+								System.out.println("3. confirmar pedido y finalizar");
+								
 								salida = Integer.parseInt(br.readLine());
 
 							}catch(NumberFormatException e){
@@ -714,11 +718,11 @@ public class MainProyecto {
 
 								Pedido ped = new Pedido(fechaActual, cod_personal,codigo,direccion);
 								bdped.nuevo_pedido(ped, lPedido);
-
+								System.out.println("tu pedido ha sido realizado con exito");
 								break;
 
 							}
-						}while(salida!=4);
+						}while(salida!=3);
 						
 
 					}
