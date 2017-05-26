@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-05-2017 a las 08:38:08
+-- Tiempo de generación: 26-05-2017 a las 10:13:02
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `linea_pedido` (
   `cod_plato` int(11) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `fecha_hora` date NOT NULL,
+  `precio` double(5,2) NOT NULL,
   PRIMARY KEY (`num_pedido`),
   KEY `fecha_hora` (`fecha_hora`),
   KEY `cod_plato` (`cod_plato`)
@@ -64,7 +65,15 @@ CREATE TABLE IF NOT EXISTS `menu` (
   PRIMARY KEY (`cod_plato`),
   KEY `cod_restaurante` (`cod_restaurante`),
   KEY `cod_restaurante_2` (`cod_restaurante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `menu`
+--
+
+INSERT INTO `menu` (`cod_plato`, `cod_restaurante`, `precio`, `nombre`) VALUES
+(1, 1, 5, 'hamburguesa de buey'),
+(2, 1, 10, 'pasta terillaki');
 
 -- --------------------------------------------------------
 
@@ -84,6 +93,7 @@ CREATE TABLE IF NOT EXISTS `ofertas` (
 --
 
 INSERT INTO `ofertas` (`cod_oferta`, `descuento`, `descripcion`) VALUES
+(1, 0, 'no_oferta'),
 (52895, 5, 'oferta usuario nuevo');
 
 -- --------------------------------------------------------
@@ -97,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   `fecha_hora` date NOT NULL,
   `cod_restaurante` int(11) DEFAULT NULL,
   `cod_personal` int(11) NOT NULL,
+  `importe_total` double(5,2) NOT NULL,
   PRIMARY KEY (`num_pedido`),
   KEY `cod_personal` (`cod_personal`),
   KEY `cod_restaurante` (`cod_restaurante`)
@@ -115,7 +126,16 @@ CREATE TABLE IF NOT EXISTS `personal` (
   `nombre` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
   `apellido` varchar(60) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`cod_empleado`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=102 ;
+
+--
+-- Volcado de datos para la tabla `personal`
+--
+
+INSERT INTO `personal` (`cod_empleado`, `dni`, `fecha_alta`, `nombre`, `apellido`) VALUES
+(1, '1234567X', '2017-05-25', 'Juan', 'Palomo'),
+(100, '999999I', '2017-05-25', 'Internet', 'Pedido'),
+(101, '12345678J', '2017-05-26', 'palomo', 'juan');
 
 -- --------------------------------------------------------
 
@@ -125,20 +145,20 @@ CREATE TABLE IF NOT EXISTS `personal` (
 
 CREATE TABLE IF NOT EXISTS `restaurante` (
   `cod_restaurante` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `direccion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `cod_postal` int(5) DEFAULT NULL,
   `telefono` int(9) DEFAULT NULL,
   `cif` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`cod_restaurante`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `restaurante`
 --
 
-INSERT INTO `restaurante` (`cod_restaurante`, `nombre`, `direccion`, `cod_postal`, `telefono`, `cif`) VALUES
-(1, 'chino mandalin', 'langstrass', 28007, 123456789, '123456789x');
+INSERT INTO `restaurante` (`cod_restaurante`, `direccion`, `cod_postal`, `telefono`, `cif`, `nombre`) VALUES
+(1, 'calle san benito 6', 28007, 625869854, '545642315s', 'zheng pei');
 
 -- --------------------------------------------------------
 
@@ -148,22 +168,27 @@ INSERT INTO `restaurante` (`cod_restaurante`, `nombre`, `direccion`, `cod_postal
 
 CREATE TABLE IF NOT EXISTS `usuario_registrado` (
   `email` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `cod_restaurante` int(11) DEFAULT NULL,
   `contrasena` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
   `apellidos` varchar(60) COLLATE utf8_spanish_ci DEFAULT NULL,
   `direccion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `cod_postal` int(5) NOT NULL,
   `cod_oferta` int(11) NOT NULL,
+  `tipo` varchar(5) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`email`),
-  KEY `cod_oferta` (`cod_oferta`)
+  KEY `cod_oferta` (`cod_oferta`),
+  KEY `cod_restaurante` (`cod_restaurante`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuario_registrado`
 --
 
-INSERT INTO `usuario_registrado` (`email`, `contrasena`, `nombre`, `apellidos`, `direccion`, `cod_postal`, `cod_oferta`) VALUES
-('a.tatschke@gmail.com', 'ricocomer', 'alejandro', 'tatschke', 'calle tu madre 89', 28007, 52895);
+INSERT INTO `usuario_registrado` (`email`, `cod_restaurante`, `contrasena`, `nombre`, `apellidos`, `direccion`, `cod_postal`, `cod_oferta`, `tipo`) VALUES
+('admin@admin.com', NULL, '1234', 'admin', 'admin', 'admin', 28007, 52895, 'admin'),
+('coy@gmail.com', NULL, '1234', 'carlos', 'olaya', 'san benito 2', 28029, 52895, 'usuar'),
+('pato@pato.com', 1, '1234', 'pato laqueado', 'china', 'calle san benito 6', 28029, 1, 'resta');
 
 -- --------------------------------------------------------
 
@@ -224,6 +249,7 @@ ALTER TABLE `pedido`
 -- Filtros para la tabla `usuario_registrado`
 --
 ALTER TABLE `usuario_registrado`
+  ADD CONSTRAINT `usuario_registrado_ibfk_2` FOREIGN KEY (`cod_restaurante`) REFERENCES `restaurante` (`cod_restaurante`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `usuario_registrado_ibfk_1` FOREIGN KEY (`cod_oferta`) REFERENCES `ofertas` (`cod_oferta`);
 
 --
