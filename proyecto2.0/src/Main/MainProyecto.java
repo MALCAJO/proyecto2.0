@@ -741,6 +741,10 @@ public class MainProyecto {
 									switch(salida){
 									case 1:
 										
+										nombre=usuarior.getNombre();
+										direccion = usuarior.getDireccion_habitual();
+										codres=bdrest.buscar_codrestaurante(nombre, direccion);
+										
 										
 										
 										try{

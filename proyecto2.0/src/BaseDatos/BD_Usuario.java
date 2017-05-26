@@ -103,6 +103,7 @@ public class BD_Usuario extends BD_Conecta{
 				Usuario.setContraseña(reg.getString("contrasena"));
 				Usuario.setDireccion_habitual(reg.getString("direccion"));
 				Usuario.setTipo(reg.getString("tipo"));
+				
 			}
 			s.close();
 			this.cerrar();
