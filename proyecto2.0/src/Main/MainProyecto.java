@@ -77,7 +77,7 @@ public class MainProyecto {
 						System.out.println("error, no se ha podido conectar");
 					else
 						if (usuarior.getApellidos()==null)
-							System.out.println("el usuario y la contraseña no coinciden");
+							System.out.println("el usuario y la contrase�a no coinciden");
 						else{
 							//TIPO USUARIO
 							//usuario USUARIO
@@ -578,10 +578,10 @@ public class MainProyecto {
 								switch(filas){
 								
 								case 0:
-									System.out.println("No se ha podido añadir el plato");
+									System.out.println("No se ha podido a�adir el plato");
 									break;
 								case 1:
-									System.out.println("añadido el plato con éxito");
+									System.out.println("a�adido el plato con éxito");
 									break;
 								case -1:
 									System.out.println("Ha ocurrido un error, vuelva ha intentarlo más tarde.");
@@ -634,7 +634,7 @@ public class MainProyecto {
 
 							case 4:
 								
-								System.out.println("buenas tardes cliente");
+								System.out.println("Hasta luego");
 								
 								break;
 
@@ -651,9 +651,11 @@ public class MainProyecto {
 					}catch(NumberFormatException e){
 						System.out.println(e.getMessage());
 					}
+					System.out.println("dime la direccion en la que quieres entregar el pedido");
+					direccion = br.readLine();
 					Vector <Restaurante> restaurantes=bdrest.listarRestaurantesXzona(codpos);
 					if (restaurantes==null){
-						System.out.println("En este momento no podemos realizar la operación");
+						System.out.println("En este momento no podemos realizar la operacion");
 
 					}else{
 						System.out.println("Listado de restaurantes");
@@ -661,9 +663,63 @@ public class MainProyecto {
 							System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
 						System.out.print("dime el restaurante que quieres");
 						codres = Integer.parseInt(br.readLine());
+						
+						Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
+						System.out.println(menus);
+						if(menus.size()==0){
+							System.out.println("todavia no se han dado de alta menus");
+						}
+
+						do{
+							try{
+								System.out.println("1. agregar plato del menu");
+								System.out.println("2. quitar plato del menu");
+								System.out.println("3. confirmar pedido");
+								System.out.println("4. salida");
+								salida = Integer.parseInt(br.readLine());
+
+							}catch(NumberFormatException e){
+								System.out.println(e.getMessage());
+							}
+
+							switch(salida){
+
+							case 1:
 
 
+								System.out.println("que plato quieres? dime el codigo del plato");
+								cod_plato = Integer.parseInt(br.readLine());
+								System.out.println("cuantos platos quieres?");
+								qPlatos = Integer.parseInt(br.readLine());
+								precio = bdmenu.devuelve_precio(cod_plato, qPlatos);
+								System.out.println(precio+ " este es el precio del plato por cantidad");
+								lPedido.add(new Linea_pedido(cod_plato, qPlatos, fechaActual, precio));
 
+								break;
+
+							case 2:
+
+								for(i=0;i<lPedido.size();i++)
+									System.out.println(i+1+" "+lPedido.get(i).toString());
+								System.out.println("que platos quieres quitar? dime el codigo");
+								pos = Integer.parseInt(br.readLine());
+								lPedido.remove(pos);
+
+								break;
+							case 3:
+
+								System.out.println("tu pedido");
+								for(i=0;i<lPedido.size();i++)
+									System.out.println(lPedido.get(i).toString());
+
+								Pedido ped = new Pedido(fechaActual, cod_personal,codigo,direccion);
+								bdped.nuevo_pedido(ped, lPedido);
+
+								break;
+
+							}
+						}while(salida!=4);
+						
 
 					}
 					break;
@@ -675,7 +731,7 @@ public class MainProyecto {
 				
 			case 2:
 
-				System.out.println("A continuación te pediremos los datos para poder realizar el registro.");
+				System.out.println("A continuacion te pediremos los datos para poder realizar el registro.");
 
 				System.out.println("Cual es tu nombre?");
 				nombre=br.readLine();
@@ -698,20 +754,20 @@ public class MainProyecto {
 						break;							
 					}
 				}while(filas!=0);	
-				System.out.println("Contraseña:");
+				System.out.println("Contrase�a:");
 				contrasena= br.readLine();
 				System.out.println("Direccion:");
 				direccion=br.readLine();
 				try{
 					do{
-						System.out.println("Código postal");
+						System.out.println("Codigo postal");
 						codpos=Integer.parseInt(br.readLine());
 					}while(codpos<0 || codpos>99999);
 				}catch(NumberFormatException e){
 					System.out.println(e.getMessage());
 				}
 				try{
-					System.out.println("Y por último, teléfono:");
+					System.out.println("Y por ultimo, telefono:");
 					telefono=Integer.parseInt(br.readLine());
 				}catch(NumberFormatException e){
 					System.out.println(e.getMessage());
@@ -736,7 +792,16 @@ public class MainProyecto {
 				//prueba
 
 				break;
-
+				
+				
+			case 3:
+				
+				
+				Vector <Restaurante> restaurantes=bdrest.listarRestaurantes();
+				for (i=0;i<restaurantes.size();i++)
+					System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
+				
+				break;
 			}
 
 		} while (menu != 4);
