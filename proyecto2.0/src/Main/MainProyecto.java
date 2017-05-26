@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import BaseDatos.*;
 
@@ -26,7 +28,7 @@ public class MainProyecto {
 		String direccion, nombre, apellido;
 		int i=0,filas,telefono=0, codigo = 0,salida=0, cod_plato = 0, qPlatos=0, cod_personal=100,pos=0, cod_oferta=0, descuento=0,vehiculo=0;
 		double precio = 0, importe=0;
-		boolean correcto=false;
+		boolean correcto=false, validar=false;
 		LocalDate fechaActual = LocalDate.now();
 		Vector <Linea_pedido> lPedido = new Vector<Linea_pedido>();
 
@@ -68,8 +70,17 @@ public class MainProyecto {
 				//usuario registrado
 				if (regist.equals("SI")){
 					System.out.println("login");
+					do{
 					System.out.println("email:");
 					email = br.readLine();
+					
+					validar=validarEmail(email);
+					if(validar==true)
+						System.out.println("email en formato correcto");
+					else
+						System.out.println("email en formato incorrecto");
+					}while(validar!=true);
+					
 					System.out.println("contraseña:");
 					contrasena = br.readLine();
 					Usu_Registrado usuarior = bdusu.verificar_login(email, contrasena);
@@ -387,8 +398,16 @@ public class MainProyecto {
 										System.out.println("Direccion");
 										direccion=br.readLine();
 										do{	
+											do{
 											System.out.println("Email: ");//hacer comprobacion de email.
 											email=br.readLine();
+											validar=validarEmail(email);
+											if(validar==true)
+												System.out.println("email en formato correcto");
+											else
+												System.out.println("email en formato incorrecto");
+											}while(validar!=true);
+											
 											filas=bdusu.comprobar_email(email);
 											switch(filas){
 											case 0:
@@ -516,9 +535,16 @@ public class MainProyecto {
 
 										break;
 									case 3://opcion para eliminar un usuario de la BBDD
-
+										do{
 										System.out.println("Introduce el email del usuario que quieres eliminar:");
 										email=br.readLine();
+										validar=validarEmail(email);
+										if(validar==true)
+											System.out.println("email en formato correcto");
+										else
+											System.out.println("email en formato incorrecto");
+										}while(validar!=true);
+										
 										filas=bdusu.borrar_usuario(email);
 										switch(filas){
 										case 0:
@@ -779,17 +805,10 @@ public class MainProyecto {
 
 									case 2:
 
-										try{
-											System.out.println("dime el codigo del restaurante");
-											cod_restaurante = Integer.parseInt(br.readLine());
-										} catch (NumberFormatException N) {
-											System.out.println(N.getMessage());
-										}
-										catch (IOException e){
-											System.out.println(e.getMessage());
-											System.exit(0);
-										}
-										bdmenu.listarmenusXrestaurante(cod_restaurante);
+										nombre=usuarior.getNombre();
+										direccion = usuarior.getDireccion_habitual();
+										codres=bdrest.buscar_codrestaurante(nombre, direccion);
+										bdmenu.listarmenusXrestaurante(codres);
 										try{
 											System.out.println("dime el codigo del menu");
 											cod_plato = Integer.parseInt(br.readLine());
@@ -818,17 +837,10 @@ public class MainProyecto {
 										break;
 
 									case 3:
-										try{
-											System.out.println("dime el codigo del restaurante");
-											cod_restaurante = Integer.parseInt(br.readLine());
-										} catch (NumberFormatException N) {
-											System.out.println(N.getMessage());
-										}
-										catch (IOException e){
-											System.out.println(e.getMessage());
-											System.exit(0);
-										}
-										bdmenu.listarmenusXrestaurante(cod_restaurante);
+										nombre=usuarior.getNombre();
+										direccion = usuarior.getDireccion_habitual();
+										codres=bdrest.buscar_codrestaurante(nombre, direccion);
+										bdmenu.listarmenusXrestaurante(codres);
 										try{
 											System.out.println("dime el codigo del menu");
 											cod_plato = Integer.parseInt(br.readLine());
@@ -1013,9 +1025,16 @@ public class MainProyecto {
 				System.out.println("Apellido?");
 				apellido = br.readLine();
 				do{
-
+					do{
 					System.out.println("Email: ");//hacer comprobacion de email.
 					email=br.readLine();
+					validar=validarEmail(email);
+					if(validar==true)
+						System.out.println("email en formato correcto");
+					else
+						System.out.println("email en formato incorrecto");
+					}while(validar!=true);
+					
 					filas=bdusu.comprobar_email(email);
 					switch(filas){
 					case 0:
@@ -1081,5 +1100,22 @@ public class MainProyecto {
 
 		} while (menu != 4);
 	}
+	
+	
+	public static boolean validarEmail(String email){
+	
+		Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Matcher mather = pattern.matcher(email);
+		if (mather.find() == true) {
+            System.out.println("El email ingresado es válido.");
+            return true;
+        } else {
+            System.out.println("El email ingresado es inválido.");
+            return false;
+        }
+	}
+	
 }
 
