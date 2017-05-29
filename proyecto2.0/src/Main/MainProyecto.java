@@ -639,10 +639,10 @@ public class MainProyecto {
 											System.out.println("No se ha realizado la baja");
 											break;
 										case 1:
-											System.out.println("Baja realizada con éxito");
+											System.out.println("Baja realizada con exito");
 											break;
 										case -1:
-											System.out.println("Ha ocurrido un error, vuelva ha intentarlo más tarde.");
+											System.out.println("Ha ocurrido un error, vuelva ha intentarlo mas tarde.");
 											break;
 										}
 
@@ -789,7 +789,7 @@ public class MainProyecto {
 										codres=bdrest.buscar_codrestaurante(nombre, direccion);
 										
 										
-										
+										do{
 										try{
 											System.out.println("dime el precio del plato");
 											precio = Double.parseDouble(br.readLine());
@@ -800,6 +800,7 @@ public class MainProyecto {
 											System.out.println(n.getMessage());
 											System.exit(0);
 										}
+										}while(precio>=0);
 										System.out.println("dime el nombre del plato");
 										nombre = br.readLine();
 
@@ -928,7 +929,7 @@ public class MainProyecto {
 							System.exit(0);
 						}
 						for(i=0;i<restaurantes.size();i++){
-							if(restaurantes.get(i).getCod_restaurante()==codigo)
+							if(restaurantes.get(i).getCod_restaurante()==codres)
 								correcto=true;
 						}
 
