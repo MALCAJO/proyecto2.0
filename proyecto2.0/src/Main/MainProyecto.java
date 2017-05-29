@@ -578,7 +578,7 @@ public class MainProyecto {
 											break;
 										}
 										break;
-									case 4://dar de alta un nuevo empleado y su respectivo vehículo
+									case 4://dar de alta un nuevo empleado y su respectivo vehiculo
 
 										System.out.println("Introduce nombre");
 										nombre=br.readLine();
