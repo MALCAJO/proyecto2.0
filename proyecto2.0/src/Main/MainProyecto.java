@@ -915,7 +915,9 @@ public class MainProyecto {
 						System.out.println("Listado de restaurantes");
 						for (i=0;i<restaurantes.size();i++)
 							System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
+						do{
 						try{
+							correcto=false;
 							System.out.print("dime el restaurante que quieres");
 							codres = Integer.parseInt(br.readLine());
 						} catch (NumberFormatException N) {
@@ -925,6 +927,12 @@ public class MainProyecto {
 							System.out.println(e.getMessage());
 							System.exit(0);
 						}
+						for(i=0;i<restaurantes.size();i++){
+							if(restaurantes.get(i).getCod_restaurante()==codigo)
+								correcto=true;
+						}
+
+					}while(correcto==false);
 						Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
 						for(i=0;i<menus.size();i++)
 							System.out.println(menus.get(i).toString());
