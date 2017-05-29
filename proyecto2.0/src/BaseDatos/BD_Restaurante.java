@@ -8,7 +8,7 @@ import modelos.Restaurante;
 
 /**
  * 
- * @author admin
+ * @author Carlos
  *
  */
 public class BD_Restaurante extends BD_Conecta{

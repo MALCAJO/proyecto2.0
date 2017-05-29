@@ -6,6 +6,11 @@ import java.time.*;
 import Main.MainProyecto;
 import modelos.Usu_Registrado;
 
+/**
+ * 
+ * @author Carlos
+ *
+ */
 public class BD_Usuario extends BD_Conecta{
 	private static Statement s;	
 	private static ResultSet reg;
@@ -15,7 +20,11 @@ public class BD_Usuario extends BD_Conecta{
 		// TODO Auto-generated constructor stub
 	}
 	
-//Método para dar de alta un usuario.
+/**
+ * Método para dar de alta un usuario.
+ * @param usu
+ * @return
+ */
 	public  int alta_usuario( Usu_Registrado usu){	
 		String cadenaSQL="INSERT INTO usuario_registrado VALUES('" + usu.getEmail()+ "','" +usu.getContraseña()+"','"+ usu.getNombre() +"','"+ usu.getApellidos()+"','"+ usu.getDireccion_habitual()+"','"+ usu.getCod_postal() +"','"+ usu.getCod_oferta() +"','"+usu.getTipo()+"')"; 				
 		try{
@@ -31,7 +40,11 @@ public class BD_Usuario extends BD_Conecta{
 			return -1;
 		}
 	}
-//Método para borrar usuario.
+/**
+ * Método para borrar usuario.
+ * @param email
+ * @return
+ */
 	public int borrar_usuario(String email){
 		String cadenaSQL="DELETE FROM usuario_registrado WHERE `email` = '" + email+"' ";
 		try{
@@ -47,7 +60,13 @@ public class BD_Usuario extends BD_Conecta{
 			return -1;
 		}
 	}
-//Método para cambiar contraseña de  usuario.
+/**
+ * Método para cambiar contraseña de  usuario.
+ * @param email
+ * @param contraseñaN
+ * @param contraseñaV
+ * @return
+ */
 	public int editar_contra_usuario( String email,String contraseñaN, String contraseñaV){
 		String cadenaSQL="UPDATE usuario_registrado SET 'contrasena'= '" + contraseñaN + "' WHERE `email`= '" +email+"'AND `contrasena`= '" +contraseñaV+"' ";
 		try{
@@ -63,7 +82,11 @@ public class BD_Usuario extends BD_Conecta{
 			return -1;
 		}
 	}
-//Método para comprobar si un email esta en uso en la BBDD
+/**
+ * Método para comprobar si un email esta en uso en la BBDD
+ * @param email
+ * @return
+ */
 	public int comprobar_email(String email){
 		String cadenaSQL="SELECT * FROM usuario_registrado WHERE email = '"+email+"' ";				
 		try{
@@ -84,7 +107,12 @@ public class BD_Usuario extends BD_Conecta{
 			return -1;
 		}				
 	}
-//Método para verificar el login y que devuelve un objeto usuario
+/**
+ * Método para verificar el login y que devuelve un objeto usuario
+ * @param email
+ * @param contrasena
+ * @return
+ */
 	public Usu_Registrado verificar_login(String email, String contrasena){
 		
 		String cadenaSQL="SELECT * FROM usuario_registrado WHERE email = '" +email +"'AND contrasena ='"+ contrasena+"'";

@@ -5,6 +5,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import modelos.Empleado;
+/**
+ * 
+ * @author Marina
+ *
+ */
 public class BD_Empleado extends BD_Conecta {
 	private static Statement s;	
 	private static ResultSet reg;

@@ -7,7 +7,11 @@ import Main.MainProyecto;
 import modelos.Pedido;
 import modelos.Oferta;
 import modelos.Linea_pedido;
-
+/**
+ * 
+ * @author Marina y Carlos
+ *
+ */
 public class BD_Pedido extends BD_Conecta{
 	private static Statement s;	
 	private static ResultSet reg;
@@ -17,7 +21,12 @@ public class BD_Pedido extends BD_Conecta{
 		// TODO Auto-generated constructor stub
 	}
 	
-	//Metodo para generar un pedido
+	/**
+	 * Metodo para generar un pedido
+	 * @param ped
+	 * @param ve
+	 * @return
+	 */
 	public  int nuevo_pedido( Pedido ped, Vector<Linea_pedido> ve){	
 		
 		String cadenaSQL="INSERT INTO pedido(fecha_hora,cod_restaurante,cod_personal,importe_total) VALUES('" +
