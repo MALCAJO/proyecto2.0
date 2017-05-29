@@ -246,7 +246,7 @@ public class MainProyecto {
 										}
 										Vector <Restaurante> restaurantes=bdrest.listarRestaurantesXzona(codpos);
 										if (restaurantes==null){
-											System.out.println("En este momento no podemos realizar la operación");
+											System.out.println("En este momento no podemos realizar la operacion");
 
 										}else{
 											System.out.println("Listado de restaurantes");
