@@ -11,6 +11,11 @@ import BaseDatos.*;
 
 import modelos.*;
 
+/**
+ * 
+ * @author Alejandro
+ *
+ */
 
 public class MainProyecto {
 
@@ -359,11 +364,7 @@ public class MainProyecto {
 
 												}
 											}while(salida!=3);
-
-
 										}}}}
-
-
 
 							//TIPO ADMIN
 							if(usuarior.getTipo().equals("admin")){
@@ -744,7 +745,6 @@ public class MainProyecto {
 								}while(menu!=9);
 							}
 
-
 							//TIPO RESTAURANTE
 							if(usuarior.getTipo().equals("resta")){
 								do{
@@ -873,7 +873,6 @@ public class MainProyecto {
 
 									}}while(salida!=4);
 							}}}
-
 
 				//usuario no registrado
 				if(regist.equals("NO")){
@@ -1006,15 +1005,10 @@ public class MainProyecto {
 
 							}
 						}while(salida!=3);
-
-
 					}
 					break;
 				}
-
 				break;
-
-
 
 			case 2:
 
@@ -1082,26 +1076,25 @@ public class MainProyecto {
 					break;							
 				}
 
-
-				//prueba
-
 				break;
 
-
 			case 3:
-
 
 				Vector <Restaurante> restaurantes=bdrest.listarRestaurantes();
 				for (i=0;i<restaurantes.size();i++)
 					System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
-
 				break;
 			}
 
 		} while (menu != 4);
 	}
 	
-	
+	/**
+	 * 
+	 * @param email
+	 * @author Alejandro
+	 * @return
+	 */
 	public static boolean validarEmail(String email){
 	
 		Pattern pattern = Pattern
@@ -1115,7 +1108,5 @@ public class MainProyecto {
             System.out.println("El email ingresado es inválido.");
             return false;
         }
-	}
-	
+	}	
 }
-
