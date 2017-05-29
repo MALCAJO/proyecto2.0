@@ -26,7 +26,7 @@ public class BD_Vehiculo extends BD_Conecta{
 			this.cerrar();
 			return filas;
 			}
-			catch ( SQLException e){
+		catch ( SQLException e){
 				this.cerrar();
 				System.out.println(e.getMessage());
 				return -1;
@@ -43,7 +43,7 @@ public class BD_Vehiculo extends BD_Conecta{
 			this.cerrar();
 			return filas;
 		}
-		catch ( SQLException e){		
+		catch (SQLException e){		
 			this.cerrar();
 			return -1;
 		}
