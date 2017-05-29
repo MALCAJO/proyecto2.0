@@ -615,7 +615,7 @@ public class MainProyecto {
 												System.out.println("Vehiculo añadido con exito");														
 												break;
 											case -1:
-												System.out.println("Ha ocurrido un error, vuelva ha intentarlo mÃ¡s tarde.");
+												System.out.println("Ha ocurrido un error, vuelva ha intentarlo mas tarde.");
 												break;
 											}
 										}
