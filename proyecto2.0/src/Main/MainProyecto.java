@@ -142,6 +142,7 @@ public class MainProyecto {
 										System.out.println(menus.get(i).toString());
 									if(menus.size()==0){
 										System.out.println("todavia no se han dado de alta menus");
+										break;
 									}
 
 									do{
@@ -288,6 +289,7 @@ public class MainProyecto {
 
 											if(menus.size()==0){
 												System.out.println("todavia no se han dado de alta menus");
+												break;
 											}
 
 											do{
@@ -939,6 +941,7 @@ public class MainProyecto {
 							System.out.println(menus.get(i).toString());
 						if(menus.size()==0){
 							System.out.println("todavia no se han dado de alta menus");
+							break;
 						}
 
 						do{
