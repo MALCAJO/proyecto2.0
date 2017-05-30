@@ -783,13 +783,11 @@ public class MainProyecto {
 										System.out.println(e.getMessage());
 										System.exit(0);
 									}
+									nombre=usuarior.getNombre();
+									direccion = usuarior.getDireccion_habitual();
+									codres=bdrest.buscar_codrestaurante(nombre, direccion);
 									switch(salida){
 									case 1:
-										
-										nombre=usuarior.getNombre();
-										direccion = usuarior.getDireccion_habitual();
-										codres=bdrest.buscar_codrestaurante(nombre, direccion);
-										
 										
 										do{
 										try{
@@ -802,7 +800,7 @@ public class MainProyecto {
 											System.out.println(n.getMessage());
 											System.exit(0);
 										}
-										}while(precio>=0);
+										}while(precio<0);
 										System.out.println("dime el nombre del plato");
 										nombre = br.readLine();
 
@@ -825,9 +823,7 @@ public class MainProyecto {
 
 									case 2:
 
-										nombre=usuarior.getNombre();
-										direccion = usuarior.getDireccion_habitual();
-										codres=bdrest.buscar_codrestaurante(nombre, direccion);
+										
 										bdmenu.listarmenusXrestaurante(codres);
 										try{
 											System.out.println("dime el codigo del menu");
@@ -857,9 +853,7 @@ public class MainProyecto {
 										break;
 
 									case 3:
-										nombre=usuarior.getNombre();
-										direccion = usuarior.getDireccion_habitual();
-										codres=bdrest.buscar_codrestaurante(nombre, direccion);
+										
 										bdmenu.listarmenusXrestaurante(codres);
 										try{
 											System.out.println("dime el codigo del menu");
