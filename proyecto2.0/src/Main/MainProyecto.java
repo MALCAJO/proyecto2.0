@@ -1116,7 +1116,7 @@ public class MainProyecto {
 	 * 
 	 * @param email
 	 * @author Alejandro
-	 * @return
+	 * @return email
 	 */
 	public static boolean validarEmail(String email){
 	
