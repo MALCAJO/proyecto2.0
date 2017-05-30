@@ -41,6 +41,7 @@ public class BD_Vehiculo extends BD_Conecta{
 				return -1;
 			}
 	}
+
 	/**
 	 * Metodo que oermite dar de baja un vehiuclo por averia,etc o eliminarlo de la base de datos
 	 * @param matricula

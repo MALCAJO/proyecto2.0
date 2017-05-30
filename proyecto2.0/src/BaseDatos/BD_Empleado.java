@@ -24,7 +24,7 @@ public class BD_Empleado extends BD_Conecta {
  * @return
  */
 	public int altaEmpleado(Empleado em){
-		String cadenaSQL="INSERT INTO personal (dni,fecha_alta,nombre,apellido) VALUES('"+em.getDni()+"','"+em.getFecha_Alta()+"','"+em.getApellidos() +"','"+ em.getNombre()+ "')"; 	
+		String cadenaSQL="INSERT INTO personal (dni,fecha_alta,nombre,apellido) VALUES('"+em.getDni()+"','"+em.getFecha_Alta()+"','"+em.getNombre() +"','"+ em.getApellidos()+ "')"; 	
 		try{
 			this.abrir();
 			s=c.createStatement();

@@ -76,16 +76,16 @@ public class MainProyecto {
 				if (regist.equals("SI")){
 					System.out.println("login");
 					do{
-					System.out.println("email:");
-					email = br.readLine();
-					
-					validar=validarEmail(email);
-					if(validar==true)
-						System.out.println("email en formato correcto");
-					else
-						System.out.println("email en formato incorrecto");
+						System.out.println("email:");
+						email = br.readLine();
+
+						validar=validarEmail(email);
+						if(validar==true)
+							System.out.println("email en formato correcto");
+						else
+							System.out.println("email en formato incorrecto");
 					}while(validar!=true);
-					
+
 					System.out.println("contraseña:");
 					contrasena = br.readLine();
 					Usu_Registrado usuarior = bdusu.verificar_login(email, contrasena);
@@ -119,24 +119,24 @@ public class MainProyecto {
 										System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
 									//codigo del restaurante
 									do{
-									try{
-										correcto=false;
-									
-										System.out.println("que restaurante quieres, escribe su codigo?");
-										codigo = Integer.parseInt(br.readLine());
-									} catch (NumberFormatException N) {
-										System.out.println(N.getMessage());
-									}
-									catch (IOException e){
-										System.out.println(e.getMessage());
-										System.exit(0);
-									}
-									for(i=0;i<restaurantes.size();i++){
-										if(restaurantes.get(i).getCod_restaurante()==codigo)
-											correcto=true;
-									}
+										try{
+											correcto=false;
 
-								}while(correcto==false);
+											System.out.println("que restaurante quieres, escribe su codigo?");
+											codigo = Integer.parseInt(br.readLine());
+										} catch (NumberFormatException N) {
+											System.out.println(N.getMessage());
+										}
+										catch (IOException e){
+											System.out.println(e.getMessage());
+											System.exit(0);
+										}
+										for(i=0;i<restaurantes.size();i++){
+											if(restaurantes.get(i).getCod_restaurante()==codigo)
+												correcto=true;
+										}
+
+									}while(correcto==false);
 									Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
 									for(i=0;i<menus.size();i++)
 										System.out.println(menus.get(i).toString());
@@ -263,23 +263,23 @@ public class MainProyecto {
 											for (i=0;i<restaurantes.size();i++)
 												System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
 											do{
-											try{
-												correcto = false;
-												System.out.println("que restaurante quieres, escribe su codigo?");
-												codigo = Integer.parseInt(br.readLine());
-											} catch (NumberFormatException N) {
-												System.out.println(N.getMessage());
-											}
-											catch (IOException e){
-												System.out.println(e.getMessage());
-												System.exit(0);
-											}
-											for(i=0;i<restaurantes.size();i++){
-												if(restaurantes.get(i).getCod_restaurante()==codigo)
-													correcto=true;
-											}
+												try{
+													correcto = false;
+													System.out.println("que restaurante quieres, escribe su codigo?");
+													codigo = Integer.parseInt(br.readLine());
+												} catch (NumberFormatException N) {
+													System.out.println(N.getMessage());
+												}
+												catch (IOException e){
+													System.out.println(e.getMessage());
+													System.exit(0);
+												}
+												for(i=0;i<restaurantes.size();i++){
+													if(restaurantes.get(i).getCod_restaurante()==codigo)
+														correcto=true;
+												}
 
-										}while(correcto==false);
+											}while(correcto==false);
 											Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
 											for(i=0;i<menus.size();i++)
 												System.out.println(menus.get(i).toString());
@@ -419,15 +419,15 @@ public class MainProyecto {
 										direccion=br.readLine();
 										do{	
 											do{
-											System.out.println("Email: ");//hacer comprobacion de email.
-											email=br.readLine();
-											validar=validarEmail(email);
-											if(validar==true)
-												System.out.println("email en formato correcto");
-											else
-												System.out.println("email en formato incorrecto");
+												System.out.println("Email: ");//hacer comprobacion de email.
+												email=br.readLine();
+												validar=validarEmail(email);
+												if(validar==true)
+													System.out.println("email en formato correcto");
+												else
+													System.out.println("email en formato incorrecto");
 											}while(validar!=true);
-											
+
 											filas=bdusu.comprobar_email(email);
 											switch(filas){
 											case 0:
@@ -556,15 +556,15 @@ public class MainProyecto {
 										break;
 									case 3://opcion para eliminar un usuario de la BBDD
 										do{
-										System.out.println("Introduce el email del usuario que quieres eliminar:");
-										email=br.readLine();
-										validar=validarEmail(email);
-										if(validar==true)
-											System.out.println("email en formato correcto");
-										else
-											System.out.println("email en formato incorrecto");
+											System.out.println("Introduce el email del usuario que quieres eliminar:");
+											email=br.readLine();
+											validar=validarEmail(email);
+											if(validar==true)
+												System.out.println("email en formato correcto");
+											else
+												System.out.println("email en formato incorrecto");
 										}while(validar!=true);
-										
+
 										filas=bdusu.borrar_usuario(email);
 										switch(filas){
 										case 0:
@@ -634,6 +634,8 @@ public class MainProyecto {
 											System.out.println(e.getMessage());
 											System.exit(0);
 										}
+										
+//meter el borrar la matricula y el metodo para borrarlo
 										filas=bdemp.bajaEmpleado(cod_emple);
 										switch(filas){
 
@@ -721,9 +723,6 @@ public class MainProyecto {
 										break;
 
 									case 8:
-										//no se como continuarle, preguntar.
-										//for(i=0;i<vehi.;i++)
-										//System.out.println(vehi.get(i).toString());
 
 										try{
 											System.out.println("dime el codigo del empleado para modificar la matricula");
@@ -766,9 +765,11 @@ public class MainProyecto {
 
 							//TIPO RESTAURANTE
 							if(usuarior.getTipo().equals("resta")){
+								nombre=usuarior.getNombre();
+								direccion = usuarior.getDireccion_habitual();
+								codres=bdrest.buscar_codrestaurante(nombre, direccion);
 								do{
 									try{
-
 										//con nombre y direccion obtener cod rest
 										System.out.println("1. añadir menu");
 										System.out.println("2. borrar menu");
@@ -783,23 +784,21 @@ public class MainProyecto {
 										System.out.println(e.getMessage());
 										System.exit(0);
 									}
-									nombre=usuarior.getNombre();
-									direccion = usuarior.getDireccion_habitual();
-									codres=bdrest.buscar_codrestaurante(nombre, direccion);
+
 									switch(salida){
 									case 1:
-										
+
 										do{
-										try{
-											System.out.println("dime el precio del plato");
-											precio = Double.parseDouble(br.readLine());
-										} catch (NumberFormatException N) {
-											System.out.println(N.getMessage());
-										}
-										catch (NullPointerException n){
-											System.out.println(n.getMessage());
-											System.exit(0);
-										}
+											try{
+												System.out.println("dime el precio del plato");
+												precio = Double.parseDouble(br.readLine());
+											} catch (NumberFormatException N) {
+												System.out.println(N.getMessage());
+											}
+											catch (NullPointerException n){
+												System.out.println(n.getMessage());
+												System.exit(0);
+											}
 										}while(precio<0);
 										System.out.println("dime el nombre del plato");
 										nombre = br.readLine();
@@ -812,10 +811,10 @@ public class MainProyecto {
 											System.out.println("No se ha podido añadir el plato");
 											break;
 										case 1:
-											System.out.println("añadido el plato con Ã©xito");
+											System.out.println("añadido el plato con exito");
 											break;
 										case -1:
-											System.out.println("Ha ocurrido un error, vuelva ha intentarlo mÃ¡s tarde.");
+											System.out.println("Ha ocurrido un error, vuelva ha intentarlo mas tarde.");
 											break;
 										}
 
@@ -823,7 +822,7 @@ public class MainProyecto {
 
 									case 2:
 
-										
+
 										bdmenu.listarmenusXrestaurante(codres);
 										try{
 											System.out.println("dime el codigo del menu");
@@ -843,17 +842,17 @@ public class MainProyecto {
 											System.out.println("No se ha podido borrar el plato");
 											break;
 										case 1:
-											System.out.println("borrado el plato con Ã©xito");
+											System.out.println("borrado el plato con exito");
 											break;
 										case -1:
-											System.out.println("Ha ocurrido un error, vuelva ha intentarlo mÃ¡s tarde.");
+											System.out.println("Ha ocurrido un error, vuelva ha intentarlo mas tarde.");
 											break;
 										}
 
 										break;
 
 									case 3:
-										
+
 										bdmenu.listarmenusXrestaurante(codres);
 										try{
 											System.out.println("dime el codigo del menu");
@@ -913,23 +912,23 @@ public class MainProyecto {
 						for (i=0;i<restaurantes.size();i++)
 							System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
 						do{
-						try{
-							correcto=false;
-							System.out.print("dime el restaurante que quieres");
-							codres = Integer.parseInt(br.readLine());
-						} catch (NumberFormatException N) {
-							System.out.println(N.getMessage());
-						}
-						catch (IOException e){
-							System.out.println(e.getMessage());
-							System.exit(0);
-						}
-						for(i=0;i<restaurantes.size();i++){
-							if(restaurantes.get(i).getCod_restaurante()==codres)
-								correcto=true;
-						}
+							try{
+								correcto=false;
+								System.out.print("dime el restaurante que quieres");
+								codres = Integer.parseInt(br.readLine());
+							} catch (NumberFormatException N) {
+								System.out.println(N.getMessage());
+							}
+							catch (IOException e){
+								System.out.println(e.getMessage());
+								System.exit(0);
+							}
+							for(i=0;i<restaurantes.size();i++){
+								if(restaurantes.get(i).getCod_restaurante()==codres)
+									correcto=true;
+							}
 
-					}while(correcto==false);
+						}while(correcto==false);
 						Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
 						for(i=0;i<menus.size();i++)
 							System.out.println(menus.get(i).toString());
@@ -1043,15 +1042,15 @@ public class MainProyecto {
 				apellido = br.readLine();
 				do{
 					do{
-					System.out.println("Email: ");//hacer comprobacion de email.
-					email=br.readLine();
-					validar=validarEmail(email);
-					if(validar==true)
-						System.out.println("email en formato correcto");
-					else
-						System.out.println("email en formato incorrecto");
+						System.out.println("Email: ");//hacer comprobacion de email.
+						email=br.readLine();
+						validar=validarEmail(email);
+						if(validar==true)
+							System.out.println("email en formato correcto");
+						else
+							System.out.println("email en formato incorrecto");
 					}while(validar!=true);
-					
+
 					filas=bdusu.comprobar_email(email);
 					switch(filas){
 					case 0:
@@ -1111,7 +1110,7 @@ public class MainProyecto {
 
 		} while (menu != 4);
 	}
-	
+
 	/**
 	 * 
 	 * @param email
@@ -1119,17 +1118,17 @@ public class MainProyecto {
 	 * @return email
 	 */
 	public static boolean validarEmail(String email){
-	
+
 		Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+				.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+						+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 		Matcher mather = pattern.matcher(email);
 		if (mather.find() == true) {
-            System.out.println("El email ingresado es válido.");
-            return true;
-        } else {
-            System.out.println("El email ingresado es inválido.");
-            return false;
-        }
+			System.out.println("El email ingresado es válido.");
+			return true;
+		} else {
+			System.out.println("El email ingresado es inválido.");
+			return false;
+		}
 	}	
 }
