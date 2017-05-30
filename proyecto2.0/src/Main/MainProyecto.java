@@ -635,15 +635,26 @@ public class MainProyecto {
 											System.exit(0);
 										}
 										
-//meter el borrar la matricula y el metodo para borrarlo
-										filas=bdemp.bajaEmpleado(cod_emple);
+
+										filas=bdveh.bajaVehiculo(cod_emple);
 										switch(filas){
 
 										case 0:
 											System.out.println("No se ha realizado la baja");
 											break;
-										case 1:
-											System.out.println("Baja realizada con exito");
+										case 1:											
+											filas=bdemp.bajaEmpleado(cod_emple);
+											switch(filas){
+												case 0:
+													System.out.println("No se ha realizado la baja");
+													break;
+												case 1:
+													System.out.println("Empleado dado de baja con éxito");
+													break;
+												case -1:
+													System.out.println("Ha ocurrido un error, vuelva ha intentarlo mas tarde.");
+													break;
+											}
 											break;
 										case -1:
 											System.out.println("Ha ocurrido un error, vuelva ha intentarlo mas tarde.");

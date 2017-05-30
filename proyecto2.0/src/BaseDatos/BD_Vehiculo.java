@@ -8,7 +8,7 @@ import modelos.Vehiculo;
 
 /**
  * 
- * @author Carlos
+ * @author Marina
  *
  */
 public class BD_Vehiculo extends BD_Conecta{
@@ -44,11 +44,11 @@ public class BD_Vehiculo extends BD_Conecta{
 
 	/**
 	 * Metodo que oermite dar de baja un vehiuclo por averia,etc o eliminarlo de la base de datos
-	 * @param matricula
+	 * @param cod_emple
 	 * @return
 	 */
-	public int bajaVehiculo(String matricula){
-		String cadenaSQL="DELETE FROM vehiculo WHERE matricula='"+matricula+"' ";
+	public int bajaVehiculo(int cod_emple){
+		String cadenaSQL="DELETE FROM vehiculo WHERE cod_empleado='"+cod_emple+"' ";
 		try{
 			this.abrir();
 			s=c.createStatement();
@@ -69,7 +69,7 @@ public class BD_Vehiculo extends BD_Conecta{
 	 * @return
 	 */
 	public int modificarMatricula(String matricula,int codPer){
-		String cadenaSQL="UPDATE vehiculo SET `matriucla`= '" + matricula + "' WHERE `cod_personal`= '" + codPer+"' ";
+		String cadenaSQL="UPDATE vehiculo SET matriucla= '" + matricula + "' WHERE cod_empleado= "+codPer+" ";
 		try{
 			this.abrir();
 			s=c.createStatement();
