@@ -48,7 +48,7 @@ public class MainProyecto {
 
 		do {
 			try {
-				System.out.println("Menu");
+				System.out.println("BIENVENIDO A AL RICO COMER");
 				System.out.println("1. identificarse");
 				System.out.println("2. dar de alta");
 				System.out.println("3. listar restaurantes");
@@ -115,6 +115,14 @@ public class MainProyecto {
 									System.out.println("estos son los restaurantes del codigo postal");
 									//filtrar por codigo postal
 									Vector <Restaurante> restaurantes=bdrest.listarRestaurantesXzona(cod_postal);
+									if (restaurantes==null){
+										System.out.println("Lo sentimos en este momento no podeemos atenderle.");
+										break;
+									}
+									if (restaurantes.size()==0){
+										System.out.println("Actualmente no hay restaurantes disponibles en esta zona");
+										break;
+										}
 									for (i=0;i<restaurantes.size();i++)
 										System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
 									//codigo del restaurante
@@ -256,16 +264,21 @@ public class MainProyecto {
 										}
 										Vector <Restaurante> restaurantes=bdrest.listarRestaurantesXzona(codpos);
 										if (restaurantes==null){
-											System.out.println("En este momento no podemos realizar la operacion");
-
-										}else{
+											System.out.println("Lo sentimos en este momento no podeemos atenderle.");
+											break;
+										}
+										if(restaurantes.size()==0){
+											System.out.println("Actualmente no hay restaurantes disponibles en esta zona");
+											break;
+										}
+										else{
 											System.out.println("Listado de restaurantes");
 											for (i=0;i<restaurantes.size();i++)
 												System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
 											do{
 												try{
 													correcto = false;
-													System.out.println("que restaurante quieres, escribe su codigo?");
+													System.out.println("que restaurante quieres, escribe su código?");
 													codigo = Integer.parseInt(br.readLine());
 												} catch (NumberFormatException N) {
 													System.out.println(N.getMessage());
@@ -284,7 +297,7 @@ public class MainProyecto {
 											for(i=0;i<menus.size();i++)
 												System.out.println(menus.get(i).toString());
 
-											System.out.println("dime la direccion a la que quieres enviar el pedido");
+											System.out.println("dime la dirección a la que quieres enviar el pedido");
 											direccion = br.readLine();
 
 											if(menus.size()==0){
@@ -409,7 +422,7 @@ public class MainProyecto {
 										System.exit(0);
 									}
 									switch(menu){
-									case 1://opcion para aÃ±adir un nuevo restaurante a la BBDD
+									case 1://opcion para añadir un nuevo restaurante a la BBDD
 
 										System.out.println("Nombre del restaurante: ");
 										nombre= br.readLine();
@@ -916,9 +929,14 @@ public class MainProyecto {
 					direccion = br.readLine();
 					Vector <Restaurante> restaurantes=bdrest.listarRestaurantesXzona(codpos);
 					if (restaurantes==null){
-						System.out.println("En este momento no podemos realizar la operacion");
-
-					}else{
+						System.out.println("Lo sentimos en este momento no podeemos atenderle.");
+						break;
+					}
+					if (restaurantes.size()==0){
+						System.out.println("Actualmente no hay restaurantes disponibles en esta zona");
+						break;
+						}
+					else{
 						System.out.println("Listado de restaurantes");
 						for (i=0;i<restaurantes.size();i++)
 							System.out.println((i+1)+ ".- "+restaurantes.get(i).toString());
