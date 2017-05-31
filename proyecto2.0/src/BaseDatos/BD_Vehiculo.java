@@ -69,7 +69,7 @@ public class BD_Vehiculo extends BD_Conecta{
 	 * @return
 	 */
 	public int modificarMatricula(String matricula,int codPer){
-		String cadenaSQL="UPDATE vehiculo SET matriucla= '" + matricula + "' WHERE cod_empleado= "+codPer+" ";
+		String cadenaSQL="UPDATE vehiculo SET matricula= '" + matricula + "' WHERE cod_empleado= "+codPer+" ";
 		try{
 			this.abrir();
 			s=c.createStatement();
