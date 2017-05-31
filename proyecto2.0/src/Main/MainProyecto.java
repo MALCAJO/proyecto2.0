@@ -54,6 +54,7 @@ public class MainProyecto {
 				System.out.println("3. listar restaurantes");
 				System.out.println("4. salir");
 				menu = Integer.parseInt(br.readLine());
+				
 			} catch (NumberFormatException N) {
 				System.out.println(N.getMessage());
 			}
