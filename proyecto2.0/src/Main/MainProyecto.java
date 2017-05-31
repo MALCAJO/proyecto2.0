@@ -215,7 +215,7 @@ public class MainProyecto {
 											do{
 												try{
 													correcto=false;
-													System.out.println("que platos quieres quitar? dime el codigo");
+													System.out.println("que platos quieres quitar? dime el numero del pedido");
 													pos = Integer.parseInt(br.readLine());
 												} catch (NumberFormatException N) {
 													System.out.println(N.getMessage());
@@ -230,7 +230,7 @@ public class MainProyecto {
 												}
 
 											}while(correcto==false);
-											lPedido.remove(pos-1);
+											lPedido.remove(pos);
 
 											break;
 										case 3:
@@ -364,7 +364,7 @@ public class MainProyecto {
 													do{
 														try{
 															correcto=false;
-															System.out.println("que platos quieres quitar? dime el codigo");
+															System.out.println("que platos quieres quitar? dime el numero del pedido");
 															pos = Integer.parseInt(br.readLine());
 														} catch (NumberFormatException N) {
 															System.out.println(N.getMessage());
@@ -1026,7 +1026,7 @@ public class MainProyecto {
 								do{
 									try{
 										correcto=false;
-										System.out.println("que platos quieres quitar? dime el codigo");
+										System.out.println("que platos quieres quitar? dime el numero del pedido");
 										pos = Integer.parseInt(br.readLine());
 										for(i=0;i<menus.size();i++){
 											if(menus.get(i).getCod_plato()==cod_plato)
