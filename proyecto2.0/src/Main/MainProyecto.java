@@ -827,7 +827,7 @@ public class MainProyecto {
 										}while(precio<0);
 										System.out.println("dime el nombre del plato");
 										nombre = br.readLine();
-
+										
 										filas = bdmenu.añadir_menu(codres, precio, nombre);
 
 										switch(filas){
@@ -837,6 +837,7 @@ public class MainProyecto {
 											break;
 										case 1:
 											System.out.println("añadido el plato con exito");
+											
 											break;
 										case -1:
 											System.out.println("Ha ocurrido un error, vuelva ha intentarlo mas tarde.");
@@ -924,8 +925,8 @@ public class MainProyecto {
 										System.out.println("Hasta luego");
 
 										break;
-
-									}}while(salida!=4);
+										
+									} menus = bdmenu.listarmenusXrestaurante(codres);}while(salida!=4);
 							}}}
 
 				//usuario no registrado
@@ -975,7 +976,7 @@ public class MainProyecto {
 							}
 
 						}while(correcto==false);
-						Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codigo);
+						Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codres);
 						for(i=0;i<menus.size();i++)
 							System.out.println(menus.get(i).toString());
 						if(menus.size()==0){
