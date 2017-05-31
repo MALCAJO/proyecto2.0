@@ -230,7 +230,7 @@ public class MainProyecto {
 												}
 
 											}while(correcto==false);
-											lPedido.remove(pos);
+											lPedido.remove(pos-1);
 
 											break;
 										case 3:
@@ -379,7 +379,7 @@ public class MainProyecto {
 														}
 
 													}while(correcto==false);
-													lPedido.remove(pos);
+													lPedido.remove(pos-1);
 
 													break;
 												case 3:
@@ -1058,7 +1058,7 @@ public class MainProyecto {
 										System.exit(0);
 									}
 								}while(correcto==false);
-								lPedido.remove(pos);
+								lPedido.remove(pos-1);
 
 								break;
 							case 3:
