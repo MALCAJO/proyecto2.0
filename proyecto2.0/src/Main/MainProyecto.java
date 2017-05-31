@@ -792,6 +792,7 @@ public class MainProyecto {
 								nombre=usuarior.getNombre();
 								direccion = usuarior.getDireccion_habitual();
 								codres=bdrest.buscar_codrestaurante(nombre, direccion);
+								Vector <Menu> menus = bdmenu.listarmenusXrestaurante(codres);
 								do{
 									try{
 										//con nombre y direccion obtener cod rest
@@ -847,7 +848,9 @@ public class MainProyecto {
 									case 2:
 
 
-										bdmenu.listarmenusXrestaurante(codres);
+										System.out.println(bdmenu.listarmenusXrestaurante(codres));
+										do{
+											correcto=false;
 										try{
 											System.out.println("dime el codigo del menu");
 											cod_plato = Integer.parseInt(br.readLine());
@@ -858,8 +861,14 @@ public class MainProyecto {
 											System.out.println(e.getMessage());
 											System.exit(0);
 										}
-										filas = bdmenu.borrar_menu(cod_plato);
+										for(i=0;i<menus.size();i++){
+											if(menus.get(i).getCod_plato()==cod_plato)
+												correcto=true;
+										}
 
+									}while(correcto==false);
+										filas = bdmenu.borrar_menu(cod_plato);
+										
 										switch(filas){
 
 										case 0:
@@ -877,7 +886,9 @@ public class MainProyecto {
 
 									case 3:
 
-										bdmenu.listarmenusXrestaurante(codres);
+										System.out.println(bdmenu.listarmenusXrestaurante(codres));
+										do{
+											correcto=false;
 										try{
 											System.out.println("dime el codigo del menu");
 											cod_plato = Integer.parseInt(br.readLine());
@@ -888,6 +899,12 @@ public class MainProyecto {
 											System.out.println(e.getMessage());
 											System.exit(0);
 										}
+										for(i=0;i<menus.size();i++){
+											if(menus.get(i).getCod_plato()==cod_plato)
+												correcto=true;
+										}
+
+									}while(correcto==false);
 										try{
 											System.out.println("dime el nuevo precio del plato");
 											precio = Double.parseDouble(br.readLine());
